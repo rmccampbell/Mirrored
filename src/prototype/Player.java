@@ -13,7 +13,7 @@ public class Player extends AnimatedSprite {
 	boolean isRight;
 
 	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
-		super("player" + (isRight ? "1" : "2"), "mario_run2.png", 1, 2);
+		super("player" + (isRight ? "1" : "2"), "mario_run.png", 1, 2);
 		this.isRight = isRight;
 		parent.addChild(this);
 		setPosition(x, y);
