@@ -4,13 +4,17 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.AnimatedSprite;
+import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
+import edu.virginia.engine.physics.Direction;
 
 public class Player extends AnimatedSprite {
 
 	private static double SPEED = 4;
 
-	boolean isRight;
+	private boolean isSynced = true;
+	private boolean isRight;
+	private Player otherPlayer;
 
 	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
 		super("player" + (isRight ? "1" : "2"), "mario_run.png", 1, 2);
@@ -41,5 +45,31 @@ public class Player extends AnimatedSprite {
 		if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
 			move(0, SPEED);
 		}
+		if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+			isSynced = !isSynced;
+		}
+	}
+	
+	public void setOtherPlayer(Player otherPlayer) {
+		this.otherPlayer = otherPlayer;
+	}
+	
+	public boolean isSynced() {
+		return isSynced;
+	}
+	
+	public void setSynced(boolean isSynced) {
+		this.isSynced = isSynced;
+	}
+	
+	public void handleCollision(Direction dir) {
+		resetPosition(true, true);
+	}
+	
+	@Override
+	public void collision(DisplayObject other, Direction dir, boolean isTrigger) {
+		super.collision(other, dir, isTrigger);
+		if (!isTrigger && isSynced)
+			otherPlayer.handleCollision(dir);
 	}
 }

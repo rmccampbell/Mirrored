@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 
 import edu.virginia.engine.events.EventDispatcher;
 import edu.virginia.engine.physics.CollisionEvent;
+import edu.virginia.engine.physics.Direction;
 import edu.virginia.engine.physics.PhysicsObject;
 
 /**
@@ -35,7 +36,7 @@ public class DisplayObject extends EventDispatcher {
 	
 	private boolean visible = true;
 	private Point2D.Double position = new Point2D.Double(0, 0);
-	private Point2D.Double prevPosition = new Point2D.Double(0, 0);
+	private double prevX = 0, prevY = 0;
 	private Point pivotPoint = new Point(0, 0);
 	private double scaleX = 1, scaleY = 1;
 	private double rotation = 0.0;
@@ -103,7 +104,6 @@ public class DisplayObject extends EventDispatcher {
 	public void setPosition(double x, double y) {
 		this.position.x = x;
 		this.position.y = y;
-		this.prevPosition = new Point2D.Double(x, y);
 	}
 	
 	public void setPosition(Point2D position) {
@@ -111,7 +111,6 @@ public class DisplayObject extends EventDispatcher {
 	}
 	
 	public void move(double dx, double dy) {
-		this.prevPosition = (Point2D.Double) position.clone();
 		this.position.x += dx;
 		this.position.y += dy;
 	}
@@ -120,10 +119,13 @@ public class DisplayObject extends EventDispatcher {
 		move(disp.getX(), disp.getY());
 	}
 	
-	public Point2D getPrevPosition() {
-		return prevPosition;
+	public void resetPosition(boolean horizontal, boolean vertical) {
+		if (horizontal)
+			setX(prevX);
+		if (vertical)
+			setY(prevY);
 	}
-
+	
 	public Point getPivotPoint() {
 		return pivotPoint;
 	}
@@ -270,7 +272,8 @@ public class DisplayObject extends EventDispatcher {
 	 * to update objects appropriately.
 	 * */
 	public void update(ArrayList<Integer> pressedKeys) {
-		
+		prevX = getX();
+		prevY = getY();
 	}
 
 	/**
@@ -355,9 +358,11 @@ public class DisplayObject extends EventDispatcher {
 		return getWorldBBox().intersects(other.getWorldBBox());
 	}
 	
-	public void collision(DisplayObject other, boolean isTrigger) {
-		System.out.println(id + " collision!");
-		setPosition(getPrevPosition());
+	public void collision(DisplayObject other, Direction dir, boolean isTrigger) {
+		if (!isTrigger) {
+//			boolean isHorizontal = dir == Direction.LEFT || dir == Direction.RIGHT;
+			resetPosition(true, true);
+		}
 		dispatchEvent(new CollisionEvent(this, other, isTrigger));
 	}
 

@@ -134,8 +134,8 @@ public class PhysicsObject {
 		accelerate(accel.getX(), accel.getY());
 	}
 	
-	public void collision(PhysicsObject other) {
-		sprite.collision(other.sprite, false);
+	public void collision(PhysicsObject other, Direction dir) {
+		sprite.collision(other.sprite, dir, false);
 	}
 
 	public void ground() {
