@@ -8,16 +8,23 @@ import edu.virginia.engine.physics.PhysicsManager;
 public class Main extends Game {
 	
 	PhysicsManager pm;
+	static int gameWidth = 600;
+	static int gameHeight = 400;
 
 	public Main() {
-		super("Prototype", 600, 400);
+		super("Prototype", gameWidth, gameHeight);
 		pm = new PhysicsManager();
 		Player player1 = new Player(false, 150, 200, this);
 		Player player2 = new Player(true, 450, 200, this);
 		player1.setOtherPlayer(player2);
 		player2.setOtherPlayer(player1);
 		pm.addObject(player1);
-		pm.addObject(player2);
+		pm.addObject(player2); 
+		
+		// divider
+		// addPlatform(gameWidth/2-10, 0, 20, gameHeight);
+		addPlatform(gameWidth/2-10, 0, 20, 800);
+		
 		addPlatform(100, 100, 100, 100);
 	}
 	

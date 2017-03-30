@@ -1,6 +1,7 @@
 package edu.virginia.engine.display;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -296,6 +297,10 @@ public class DisplayObject extends EventDispatcher {
 				g2d.drawImage(displayImage, 0, 0, null);
 			}
 			
+			//visualize pivot point 
+			//g.setColor(Color.black);
+			//g.fillOval((int)(pivotPoint.getX()), (int)(pivotPoint.getY()), 10, 10);
+				
 			drawInner(g2d);
 			/*
 			 * undo the transformations so this doesn't affect other display
