@@ -1,12 +1,11 @@
 package edu.virginia.engine.particles;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import edu.virginia.engine.display.DisplayObjectContainer;
-import edu.virginia.engine.display.Sprite;
 
-public class ParticleSystem extends DisplayObjectContainer{
+public class ParticleSystem extends DisplayObjectContainer {
 
 	ArrayList<Particle> particles = new ArrayList<Particle>();
 	boolean isComplete = false;
@@ -21,36 +20,30 @@ public class ParticleSystem extends DisplayObjectContainer{
 	
 	public void create(int numParticles){
 		for(int i = 0; i < numParticles; i++){
-			particles.add(new Particle("particle", "platform.png"));
+			Particle p = new Particle("particle", "platform.png");
+			particles.add(p);
+			addChild(p);
 		}
 	}
 	
 	public boolean isComplete(){
-		for(Particle p: particles){
-			if(p.isDead()){
-				isComplete = true;
-			}else{
-				isComplete = false; 
-				break;
-			}
-		}
 		return isComplete;
 	}
 
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		for(Particle p: particles){
-			p.update(pressedKeys);
+		isComplete = true;
+		for (Iterator<Particle> iterator = particles.iterator(); iterator.hasNext();) {
+			Particle p = iterator.next();
+			if (p.isAlive()) {
+				iterator.remove();
+			} else {
+				isComplete = false;
+			}
 		}
+		if (isComplete)
+			destroy();
 	}
-	
-	@Override
-	public void draw(Graphics g){
-		for(Particle p: particles){
-			p.draw(g);
-		}
-	}
-	
 	
 }

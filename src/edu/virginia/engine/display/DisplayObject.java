@@ -35,6 +35,8 @@ public class DisplayObject extends EventDispatcher {
 	
 	private DisplayObjectContainer parent;
 	
+	private boolean isAlive = true;
+	
 	private boolean visible = true;
 	private Point2D.Double position = new Point2D.Double(0, 0);
 	private double prevX = 0, prevY = 0;
@@ -385,5 +387,13 @@ public class DisplayObject extends EventDispatcher {
 
 	public PhysicsObject addPhysics(double mass, double bounciness) {
 		return physics = new PhysicsObject(this, mass, bounciness);
+	}
+	
+	public boolean isAlive() {
+		return isAlive;
+	}
+	
+	public void destroy() {
+		isAlive = false;
 	}
 }
