@@ -11,8 +11,8 @@ public class Main extends Game {
 	
 	PhysicsManager physicsMan;
 	ParticleManager particleMan;
-	static int gameWidth = 800;
-	static int gameHeight = 600;
+	static int gameWidth = 1000;
+	static int gameHeight = 800;
 
 	public Main() {
 		super("Prototype", gameWidth, gameHeight);
@@ -25,11 +25,13 @@ public class Main extends Game {
 		physicsMan.addObject(player2); 
 		
 		// level
-		addPlatform(gameWidth/2, gameHeight/2, 20, gameHeight);
-		addPlatform(0, gameHeight/2, 20, gameHeight);
-		//addPlatform(gameWidth, gameHeight)
+		addWall(gameWidth/2, gameHeight/2, 20, gameHeight);
+		addWall(0, gameHeight/2, 20, gameHeight);
+		addWall(gameWidth-5, gameHeight/2, 20, gameHeight);
+		addWall(gameWidth/2, 0, gameWidth, 20);
+		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
 		
-		addPlatform(100, 100, 100, 100);
+		addWall(100, 100, 100, 100);
 		
 		// particles
 //		particleMan = new ParticleManager();
@@ -46,8 +48,8 @@ public class Main extends Game {
 //		particleMan.update();
 	}
 
-	private Platform addPlatform(double x, double y, double width, double height) {
-		Platform p = new Platform(x, y, width, height, this);
+	private Wall addWall(double x, double y, double width, double height) {
+		Wall p = new Wall(x, y, width, height, this);
 		physicsMan.addObject(p);
 		return p;
 	}
