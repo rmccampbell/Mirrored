@@ -2,6 +2,7 @@ package edu.virginia.engine.display;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DisplayObjectContainer extends DisplayObject {
 
@@ -27,8 +28,11 @@ public class DisplayObjectContainer extends DisplayObject {
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		for (DisplayObject child : children) {
+		for (Iterator<DisplayObject> iterator = children.iterator(); iterator.hasNext();) {
+			DisplayObject child = iterator.next();
 			child.update(pressedKeys);
+			if (!child.isAlive())
+				iterator.remove();
 		}
 	}
 	
