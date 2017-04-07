@@ -15,6 +15,7 @@ public class Player extends AnimatedSprite {
 	private boolean isSynced = true;
 	private boolean isRight;
 	private Player otherPlayer;
+	private int health;
 
 	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
 		super("player" + (isRight ? "1" : "2"), "mario_run.png", 1, 2);
@@ -26,6 +27,7 @@ public class Player extends AnimatedSprite {
 		addAnimation("walk", 0, 2);
 		setAnimation("stand");
 		addPhysics(1, 0);
+		setHealth(100);
 	}
 
 	@Override
@@ -72,4 +74,13 @@ public class Player extends AnimatedSprite {
 		if (!isTrigger && isSynced)
 			otherPlayer.handleCollision(dir);
 	}
+	
+	public void setHealth(int h){
+		this.health = h;
+	}
+	
+	public int getHealth(){
+		return health;
+	}
+	
 }

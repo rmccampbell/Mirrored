@@ -14,7 +14,7 @@ import edu.virginia.engine.physics.PhysicsObject;
 public class Enemy extends Sprite{
 
 	private String type;
-	private Sprite target;
+	private Player target;
 	private double time = 0;
 	private PhysicsObject physics;
 	
@@ -22,7 +22,7 @@ public class Enemy extends Sprite{
 		super(id);
 	}
 	
-	public Enemy(String id, String fileName, String type, DisplayObjectContainer parent, Sprite target) {
+	public Enemy(String id, String fileName, String type, DisplayObjectContainer parent, Player target) {
 		super(id, fileName);
 		parent.addChild(this);
 		physics = addPhysics();
@@ -31,6 +31,11 @@ public class Enemy extends Sprite{
 		if(this.type=="staticX") physics.setVelocity(1, 0);
 		if(this.type=="staticY") physics.setVelocity(0, 1);
 	}
+	
+	public void setTarget(Player p){
+		target = p;
+	}
+	
 	
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
@@ -57,6 +62,7 @@ public class Enemy extends Sprite{
 				physics.setVelocity(physics.getXVelocity(), physics.getYVelocity()*-1);
 			}
 		}
+		if(collidesWith(target)) target.setHealth(target.getHealth()-10);
 		dispatchEvent(new CollisionEvent(this, other, isTrigger));
 	}
 }

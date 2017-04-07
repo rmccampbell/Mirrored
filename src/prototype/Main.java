@@ -43,7 +43,7 @@ public class Main extends Game {
 //		particleMan.add(test);
 		
 		// enemies
-		Enemy e = addEnemy("e", "coin.png", "staticX", (Sprite)player1);
+		Enemy e = addEnemy("e", "coin.png", "staticX", player1);
 		e.setPosition(100,300);
 	}
 	
@@ -60,8 +60,8 @@ public class Main extends Game {
 		return p;
 	}
 	
-	private Enemy addEnemy(String id, String fileName, String type, Sprite target){
-		Enemy e = new Enemy(id, fileName, type, this, target);
+	private Enemy addEnemy(String id, String fileName, String type, Player player){
+		Enemy e = new Enemy(id, fileName, type, this, player);
 		physicsMan.addObject(e);
 		return e;
 	}
