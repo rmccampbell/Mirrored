@@ -54,6 +54,7 @@ public class Enemy extends Sprite{
 	
 	@Override
 	public void collision(DisplayObject other, Direction dir, boolean isTrigger) {
+		super.collision(other, dir, isTrigger);
 		if (!isTrigger) {
 			if(dir==Direction.LEFT || dir==Direction.RIGHT){
 				physics.setVelocity(physics.getXVelocity()*-1, physics.getYVelocity());
@@ -61,8 +62,9 @@ public class Enemy extends Sprite{
 			if(dir==Direction.UP || dir==Direction.DOWN){
 				physics.setVelocity(physics.getXVelocity(), physics.getYVelocity()*-1);
 			}
+			if(other==target){
+				target.setHealth(target.getHealth()-10);
+			}
 		}
-		if(collidesWith(target)) target.setHealth(target.getHealth()-10);
-		dispatchEvent(new CollisionEvent(this, other, isTrigger));
 	}
 }

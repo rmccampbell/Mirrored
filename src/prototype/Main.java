@@ -43,7 +43,7 @@ public class Main extends Game {
 //		particleMan.add(test);
 		
 		// enemies
-		Enemy e = addEnemy("e", "coin.png", "staticX", player1);
+		Enemy e = addEnemy("e", "coin.png", "", player1);
 		e.setPosition(100,300);
 	}
 	
