@@ -78,6 +78,14 @@ public class PhysicsObject {
 		return velocity;
 	}
 	
+	public double getXVelocity() {
+		return velocity.getX();
+	}
+	
+	public double getYVelocity() {
+		return velocity.getY();
+	}
+	
 	public void setVelocity(double vx, double vy) {
 		if (!isStatic()) {
 			this.velocity = new Point2D.Double(vx, vy);

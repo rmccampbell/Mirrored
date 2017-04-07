@@ -2,7 +2,9 @@ package prototype;
 
 import java.util.ArrayList;
 
+import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
+import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.particles.ParticleManager;
 import edu.virginia.engine.particles.ParticleSystem;
 import edu.virginia.engine.physics.PhysicsManager;
@@ -32,13 +34,17 @@ public class Main extends Game {
 		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
 		
 		addWall(100, 100, 100, 100);
-		
+
 		// particles
 //		particleMan = new ParticleManager();
 //		ParticleSystem test = new ParticleSystem("test");
 //		test.create(10);
 //		this.addChild(test);
 //		particleMan.add(test);
+		
+		// enemies
+		Enemy e = addEnemy("e", "coin.png", "staticX", (Sprite)player1);
+		e.setPosition(100,300);
 	}
 	
 	@Override
@@ -52,6 +58,12 @@ public class Main extends Game {
 		Wall p = new Wall(x, y, width, height, this);
 		physicsMan.addObject(p);
 		return p;
+	}
+	
+	private Enemy addEnemy(String id, String fileName, String type, Sprite target){
+		Enemy e = new Enemy(id, fileName, type, this, target);
+		physicsMan.addObject(e);
+		return e;
 	}
 	
 	public static void main(String[] args) {
