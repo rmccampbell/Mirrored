@@ -1,7 +1,6 @@
 package edu.virginia.engine.display;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -66,6 +65,11 @@ public class DisplayObject extends EventDispatcher {
 		this.setImage(fileName);
 		setPivotPoint(getUnscaledWidth()/2, getUnscaledHeight()/2);
 		setBBox(0, 0, getUnscaledWidth(), getUnscaledHeight());
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + id + "]";
 	}
 
 	public void setId(String id) {
@@ -365,12 +369,13 @@ public class DisplayObject extends EventDispatcher {
 		return getWorldBBox().intersects(other.getWorldBBox());
 	}
 	
-	public void collision(DisplayObject other, Direction dir, boolean isTrigger) {
-		if (!isTrigger) {
-//			boolean isHorizontal = dir == Direction.LEFT || dir == Direction.RIGHT;
-			resetPosition(true, true);
-		}
-		dispatchEvent(new CollisionEvent(this, other, isTrigger));
+	public void collision(DisplayObject other, Direction dir) {
+		resetPosition(true, true);
+		dispatchEvent(new CollisionEvent(this, other, false));
+	}
+
+	public void trigger(DisplayObject other, Direction dir) {
+		dispatchEvent(new CollisionEvent(this, other, true));
 	}
 
 	public boolean hasPhysics() {

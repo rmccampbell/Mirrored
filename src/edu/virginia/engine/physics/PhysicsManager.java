@@ -47,8 +47,13 @@ public class PhysicsManager {
 			dir = Direction.UP;
 		else 
 			dir = Direction.DOWN;
-		object1.collision(object2, dir, isTrigger);
-		object2.collision(object1, dir, isTrigger);
+		if (isTrigger) {
+			object1.trigger(object2, dir);
+			object2.trigger(object1, dir);
+		} else {
+			object1.collision(object2, dir);
+			object2.collision(object1, dir);
+		}
 	}
 
 //	private static void staticCollision(PhysicsObject object1, PhysicsObject object2) {

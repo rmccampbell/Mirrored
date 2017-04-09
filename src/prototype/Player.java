@@ -3,12 +3,11 @@ package prototype;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.physics.Direction;
 
-public class Player extends AnimatedSprite {
+public class Player extends Character {
 
 	private static double SPEED = 4;
 
@@ -69,9 +68,9 @@ public class Player extends AnimatedSprite {
 	}
 	
 	@Override
-	public void collision(DisplayObject other, Direction dir, boolean isTrigger) {
-		super.collision(other, dir, isTrigger);
-		if (!isTrigger && isSynced)
+	public void collision(DisplayObject other, Direction dir) {
+		super.collision(other, dir);
+		if (isSynced)
 			otherPlayer.handleCollision(dir);
 	}
 	

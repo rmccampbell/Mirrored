@@ -143,7 +143,7 @@ public class PhysicsObject {
 	}
 	
 	public void collision(PhysicsObject other, Direction dir) {
-		sprite.collision(other.sprite, dir, false);
+		sprite.collision(other.sprite, dir);
 	}
 
 	public void ground() {

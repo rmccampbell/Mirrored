@@ -11,7 +11,7 @@ import edu.virginia.engine.physics.CollisionEvent;
 import edu.virginia.engine.physics.Direction;
 import edu.virginia.engine.physics.PhysicsObject;
 
-public class Enemy extends Sprite{
+public class Enemy extends Character {
 
 	private String type;
 	private Player target;
@@ -23,7 +23,9 @@ public class Enemy extends Sprite{
 	}
 	
 	public Enemy(String id, String fileName, String type, DisplayObjectContainer parent, Player target) {
-		super(id, fileName);
+		super(id, fileName, 1, 1);
+		addAnimation("stand", 0, 1);
+		setAnimation("stand");
 		parent.addChild(this);
 		physics = addPhysics();
 		this.type = type;
@@ -53,18 +55,16 @@ public class Enemy extends Sprite{
 	}
 	
 	@Override
-	public void collision(DisplayObject other, Direction dir, boolean isTrigger) {
-		super.collision(other, dir, isTrigger);
-		if (!isTrigger) {
-			if(dir==Direction.LEFT || dir==Direction.RIGHT){
-				physics.setVelocity(physics.getXVelocity()*-1, physics.getYVelocity());
-			}
-			if(dir==Direction.UP || dir==Direction.DOWN){
-				physics.setVelocity(physics.getXVelocity(), physics.getYVelocity()*-1);
-			}
-			if(other==target){
-				target.setHealth(target.getHealth()-10);
-			}
+	public void collision(DisplayObject other, Direction dir) {
+		super.collision(other, dir);
+		if(dir==Direction.LEFT || dir==Direction.RIGHT){
+			physics.setVelocity(physics.getXVelocity()*-1, physics.getYVelocity());
+		}
+		if(dir==Direction.UP || dir==Direction.DOWN){
+			physics.setVelocity(physics.getXVelocity(), physics.getYVelocity()*-1);
+		}
+		if(other==target){
+			target.setHealth(target.getHealth()-10);
 		}
 	}
 }

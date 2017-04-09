@@ -22,7 +22,7 @@ public class ParticleManager {
 	public void update() {
 		for (Iterator<ParticleSystem> iterator = systems.iterator(); iterator.hasNext();) {
 			ParticleSystem system = iterator.next();
-			if (system.isComplete())
+			if (system.isComplete() && !system.isPermanent())
 				iterator.remove();
 		}
 	}
