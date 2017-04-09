@@ -14,9 +14,18 @@ public class ParticleManager {
 		this.container = container;
 	}
 	
-	public void add(ParticleSystem ps){
+	public ParticleSystem createSystem(String id, double x, double y) {
+		return add(new ParticleSystem(id, x, y, true));
+	}
+	
+	public ParticleSystem createOneOff(String id, double x, double y) {
+		return add(new ParticleSystem(id, x, y, false));
+	}
+	
+	public ParticleSystem add(ParticleSystem ps){
 		systems.add(ps);
 		container.addChild(ps);
+		return ps;
 	}
 	
 	public void update() {

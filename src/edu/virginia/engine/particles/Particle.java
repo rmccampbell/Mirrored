@@ -68,9 +68,13 @@ public class Particle extends Sprite {
 		return velocity;
 	}
 
+	public void setVelocity(double vx, double vy) {
+		this.velocity.x = vx;
+		this.velocity.y = vy;
+	}
+	
 	public void setVelocity(Point2D velocity) {
-		this.velocity.x = velocity.getX();
-		this.velocity.y = velocity.getY();
+		setVelocity(velocity.getX(), velocity.getY());
 	}
 	
 	public Point2D getGravity() {
@@ -98,14 +102,26 @@ public class Particle extends Sprite {
 		this.drag = drag;
 	}
 	
+	public double getPositionalNoise() {
+		return posNoise;
+	}
+	
 	public void setPositionalNoise(double noise) {
 		this.posNoise = noise;
+	}
+	
+	public double getVelocityNoise() {
+		return velNoise;
 	}
 	
 	public void setVelocityNoise(double noise) {
 		this.velNoise = noise;
 	}
-	
+
+	public Color getColor() {
+		return color;
+	}
+
 	public void setColor(Color color) {
 		this.color = color;
 	}

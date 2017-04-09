@@ -22,6 +22,7 @@ public class ParticleSystem extends DisplayObjectContainer {
 
 	private double minVel = 1, maxVel = 1;
 	private double minAngle = 0, maxAngle = 360;
+	private double minRot = 0, maxRot = 0;
 	private double minRotVel = 0, maxRotVel = 0;
 	private double minSize = 1, maxSize = 1;
 	private int minLifespan = 100, maxLifespan = 100;
@@ -35,6 +36,12 @@ public class ParticleSystem extends DisplayObjectContainer {
 	public ParticleSystem(String id, double x, double y) {
 		super(id);
 		setPosition(x, y);
+	}
+
+	public ParticleSystem(String id, double x, double y, boolean permanent) {
+		super(id);
+		setPosition(x, y);
+		setPermanent(permanent);
 	}
 
 	@Override
@@ -64,6 +71,8 @@ public class ParticleSystem extends DisplayObjectContainer {
 	public void createParticle() {
 		Particle p = new Particle();
 		p.setImage(sprite);
+		if (sprite != null)
+			p.setPivotPoint(p.getUnscaledWidth() / 2, p.getUnscaledHeight() / 2);
 		p.setColor(color);
 		p.setScale(randDouble(minSize, maxSize));
 		p.setGravity(gravity);
@@ -74,17 +83,26 @@ public class ParticleSystem extends DisplayObjectContainer {
 		double angle = Math.toRadians(randDouble(minAngle, maxAngle));
 		double vx = Math.cos(angle) * vel;
 		double vy = Math.sin(angle) * vel;
-		p.setVelocity(new Point2D.Double(vx, vy));
+		p.setVelocity(vx, vy);
+		p.setRotation(randDouble(minRot, maxRot));
 		p.setRotationalVelocity(randDouble(minRotVel, maxRotVel));
 		p.setLifespan(randInt(minLifespan, maxLifespan));
 		particles.add(p);
 		addChild(p);
 	}
-
+	
 	public void create(int numParticles) {
 		for(int i = 0; i < numParticles; i++){
 			createParticle();
 		}
+	}
+	
+	private double randDouble(double min, double max) {
+		return rand.nextDouble() * (max - min) + min;
+	}
+
+	private int randInt(int min, int max) {
+		return rand.nextInt(max - min + 1) + min;
 	}
 	
 	public boolean isComplete(){
@@ -103,84 +121,169 @@ public class ParticleSystem extends DisplayObjectContainer {
 		running = false;
 	}
 	
-	public void setPermanent(boolean permanent) {
-		this.permanent = permanent;
-	}
-	
 	public boolean isPermanent() {
 		return permanent;
+	}
+	
+	public ParticleSystem setPermanent(boolean permanent) {
+		this.permanent = permanent;
+		return this;
 	}
 
 	public double getRate() {
 		return rate;
 	}
 	
-	public void setRate(double rate) {
+	public ParticleSystem setRate(double rate) {
 		this.rate = rate;
+		return this;
+	}
+
+	public Color getColor() {
+		return color;
 	}
 	
-	public void setColor(Color color) {
+	public ParticleSystem setColor(Color color) {
 		this.color = color;
+		return this;
 	}
 	
-	public void setSprite(BufferedImage sprite) {
+	public BufferedImage getSprite() {
+		return sprite;
+	}
+	
+	public ParticleSystem setSprite(BufferedImage sprite) {
 		this.sprite = sprite;
+		return this;
 	}
 	
-	public void setSprite(String fileName) {
+	public ParticleSystem setSprite(String fileName) {
 		this.sprite = readImage(fileName);
+		return this;
 	}
 	
-	public void setSize(double minSize, double maxSize) {
+	public double getMinSize() {
+		return minSize;
+	}
+	
+	public double getMaxSize() {
+		return maxSize;
+	}
+	
+	public ParticleSystem setSize(double minSize, double maxSize) {
 		this.minSize = minSize;
 		this.maxSize = maxSize;
+		return this;
 	}
 	
-	public void setAngle(double minAngle, double maxAngle) {
+	public double getMinAngle() {
+		return minAngle;
+	}
+	
+	public double getMaxAngle() {
+		return maxAngle;
+	}
+	
+	public ParticleSystem setAngle(double minAngle, double maxAngle) {
 		this.minAngle = minAngle;
 		this.maxAngle = maxAngle;
+		return this;
 	}
-
-	public void setVelocity(double minVel, double maxVel) {
+	
+	public double getMinRotation() {
+		return minRot;
+	}
+	
+	public double getMaxRotation() {
+		return maxRot;
+	}
+	
+	public ParticleSystem setRotation(double minRot, double maxRot) {
+		this.minRot = minRot;
+		this.maxRot = maxRot;
+		return this;
+	}
+	
+	public double getMinVelocity() {
+		return minVel;
+	}
+	
+	public double getMaxVelocity() {
+		return maxVel;
+	}
+	
+	public ParticleSystem setVelocity(double minVel, double maxVel) {
 		this.minVel = minVel;
 		this.maxVel = maxVel;
+		return this;
+	}
+	
+	public double getMinRotationalVelocity() {
+		return minRotVel;
+	}
+	
+	public double getMaxRotationalVelocity() {
+		return maxRotVel;
 	}
 
-	public void setRotationalVelocity(double minRotVel, double maxRotVel) {
+	public ParticleSystem setRotationalVelocity(double minRotVel, double maxRotVel) {
 		this.minRotVel = minRotVel;
 		this.maxRotVel = maxRotVel;
+		return this;
 	}
 	
-	public void setLifespan(int minLifespan, int maxLifespan) {
+	public int getMinLifespan() {
+		return minLifespan;
+	}
+	
+	public int getMaxLifespan() {
+		return maxLifespan;
+	}
+	
+	public ParticleSystem setLifespan(int minLifespan, int maxLifespan) {
 		this.minLifespan = minLifespan;
 		this.maxLifespan = maxLifespan;
+		return this;
 	}
 	
-	public void setGravity(double gravity) {
+	public Point2D getGravity() {
+		return gravity;
+	}
+	
+	public ParticleSystem setGravity(double gravity) {
 		this.gravity = new Point2D.Double(0, gravity);
+		return this;
 	}
 	
-	public void setGravity(double gravityX, double gravityY) {
+	public ParticleSystem setGravity(double gravityX, double gravityY) {
 		this.gravity = new Point2D.Double(gravityX, gravityY);
+		return this;
 	}
 	
-	public void setDrag(double drag) {
+	public double getDrag() {
+		return drag;
+	}
+	
+	public ParticleSystem setDrag(double drag) {
 		this.drag = drag;
+		return this;
 	}
 	
-	public void setPositionalNoise(double noise) {
+	public double getPositionalNoise() {
+		return posNoise;
+	}
+	
+	public ParticleSystem setPositionalNoise(double noise) {
 		this.posNoise = noise;
+		return this;
 	}
 	
-	public void setVelocityNoise(double velNoise) {
+	public double getVelocityNoise() {
+		return velNoise;
+	}
+	
+	public ParticleSystem setVelocityNoise(double velNoise) {
 		this.velNoise = velNoise;
-	}
-	
-	private double randDouble(double min, double max) {
-		return rand.nextDouble() * (max - min) + min;
-	}
-
-	private int randInt(int min, int max) {
-		return rand.nextInt(max - min + 1) + min;
+		return this;
 	}
 }
