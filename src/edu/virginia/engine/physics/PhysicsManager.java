@@ -56,6 +56,11 @@ public class PhysicsManager {
 		}
 	}
 
+	public ArrayList<PhysicsObject> getCollisions(Rectangle2D r){
+		//TODO
+		return new ArrayList<PhysicsObject>();
+	}
+
 //	private static void staticCollision(PhysicsObject object1, PhysicsObject object2) {
 //		// object1 is dynamic, object2 is static
 //		boolean isVertical = resolveCollision(object1, object2);
