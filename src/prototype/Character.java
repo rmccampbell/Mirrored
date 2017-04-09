@@ -9,6 +9,7 @@ import edu.virginia.engine.physics.Direction;
 public class Character extends AnimatedSprite {
 	
 	boolean onGround = true;
+	private int health;
 
 	public Character(String id) {
 		super(id);
@@ -40,6 +41,14 @@ public class Character extends AnimatedSprite {
 		if (other instanceof Ground) {
 			onGround = true;
 		}
+	}
+	
+	public void setHealth(int h){
+		this.health = h;
+	}
+	
+	public int getHealth(){
+		return health;
 	}
 
 }

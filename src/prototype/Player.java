@@ -74,12 +74,4 @@ public class Player extends Character {
 			otherPlayer.handleCollision(dir);
 	}
 	
-	public void setHealth(int h){
-		this.health = h;
-	}
-	
-	public int getHealth(){
-		return health;
-	}
-	
 }

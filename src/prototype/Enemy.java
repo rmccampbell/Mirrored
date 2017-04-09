@@ -32,6 +32,7 @@ public class Enemy extends Character {
 		this.target = target;
 		if(this.type=="staticX") physics.setVelocity(1, 0);
 		if(this.type=="staticY") physics.setVelocity(0, 1);
+		if(this.type=="homing") physics.setVelocity(1, 1);
 	}
 	
 	public void setTarget(Player p){
@@ -47,11 +48,18 @@ public class Enemy extends Character {
 
 	public void moveTowards(){
 		int x = 0, y = 0;
-		if(target.getX() > this.getX()) x = 5;
-		else if(target.getX() < this.getX()) x = -5;
-		if(target.getY() < this.getY()) y = -5;
-		else if(target.getY() > this.getY()) y = 5;
-		this.setPosition(this.getX()+x, this.getY()+y);
+		if(target.getX() > this.getX()){
+			physics.setVelocity(Math.abs(physics.getXVelocity()), physics.getYVelocity());
+		}
+		else if(target.getX() < this.getX()){
+			physics.setVelocity(Math.abs(physics.getXVelocity())*-1, physics.getYVelocity());
+		}
+		if(target.getY() < this.getY()){
+			physics.setVelocity(physics.getXVelocity(), Math.abs(physics.getYVelocity())*-1);
+		}
+		else if(target.getY() > this.getY()){
+			physics.setVelocity(physics.getXVelocity(), Math.abs(physics.getYVelocity()));
+		}
 	}
 	
 	@Override
