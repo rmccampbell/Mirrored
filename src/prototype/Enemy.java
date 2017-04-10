@@ -39,6 +39,10 @@ public class Enemy extends Character {
 		target = p;
 	}
 	
+	@Override
+	protected void die() {
+		this.destroy();
+	}
 	
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {

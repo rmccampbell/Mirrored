@@ -18,7 +18,7 @@ public class Main extends Game {
 		// level 1
 		addGround(gameWidth/2, gameHeight/4-50, gameWidth, 350);
 		addGround(gameWidth/2, (3*gameHeight/4), gameWidth, 350);
-		Switch switch1 = new Switch("switch1", 700, 500, this);
+		Switch switch1 = new Switch("switch1", 100, 600, this);
 		physicsMan.addTrigger(switch1);
 		
 		// boundaries 
@@ -27,7 +27,6 @@ public class Main extends Game {
 		addWall(gameWidth-5, gameHeight/2, 20, gameHeight);
 		addWall(gameWidth/2, 0, gameWidth, 20);
 		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
-		
 		
 		// players
 		Player player1 = new Player(false, (0.25) * gameWidth, 600, this);
@@ -38,8 +37,8 @@ public class Main extends Game {
 		physicsMan.addObject(player2); 
 		
 		// enemies
-		Enemy e = addEnemy("e", "coin.png", "homing", player1);
-		e.setPosition(100,300);
+		Enemy e = addEnemy("e", "coin.png", "staticX", player1);
+		e.setPosition(500,500);
 	}
 	
 	@Override
