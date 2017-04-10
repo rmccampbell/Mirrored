@@ -2,10 +2,13 @@ package prototype;
 
 import java.util.ArrayList;
 
+import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.Game;
+import edu.virginia.engine.events.Event;
+import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
 
-public class Main extends Game {
+public class Main extends Game implements IEventListener{
 	
 	PhysicsManager physicsMan;
 	static int gameWidth = 1000;
@@ -20,6 +23,7 @@ public class Main extends Game {
 		addGround(gameWidth/2, (3*gameHeight/4), gameWidth, 350);
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		physicsMan.addTrigger(switch1);
+		switch1.addEventListener(this, SwitchEvent.EVENT_TYPE);
 		
 		// boundaries 
 		addWall(gameWidth/2, gameHeight/2, 20, gameHeight);
@@ -69,6 +73,15 @@ public class Main extends Game {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.start();
+	}
+
+	@Override
+	public void handleEvent(Event event) {
+		if(event.getType().equals(SwitchEvent.EVENT_TYPE)){
+			if(((DisplayObject)event.getSource()).getId().equals("switch1")){
+				
+			}
+		}
 	}
 
 }

@@ -3,7 +3,6 @@ package prototype;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.events.SwitchEvent;
 import edu.virginia.engine.physics.CollisionEvent;
 
 public class Switch extends Sprite {
@@ -19,7 +18,7 @@ public class Switch extends Sprite {
 	private void activate() {
 		activated = true;
 		setImage("lever_on.png");
-		dispatchEvent(new SwitchEvent(this, false));
+		dispatchEvent(new SwitchEvent(this));
 		System.out.println("Switch triggered");
 	}
 	
