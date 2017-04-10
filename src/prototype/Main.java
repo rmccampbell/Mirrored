@@ -43,6 +43,7 @@ public class Main extends Game implements IEventListener{
 		// enemies
 		Enemy e = addEnemy("e", "coin.png", "staticX", player1);
 		e.setPosition(500,500);
+		
 	}
 	
 	@Override
@@ -79,7 +80,6 @@ public class Main extends Game implements IEventListener{
 	public void handleEvent(Event event) {
 		if(event.getType().equals(SwitchEvent.EVENT_TYPE)){
 			if(((DisplayObject)event.getSource()).getId().equals("switch1")){
-				
 			}
 		}
 	}
