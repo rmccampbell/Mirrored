@@ -5,12 +5,13 @@ import edu.virginia.engine.events.Event;
 
 public class CollisionEvent extends Event {
 	public static String COLLISION = "collision";
+	public static String TRIGGER = "trigger";
 	
 	private DisplayObject source, other;
 	private boolean isTrigger;
 	
 	public CollisionEvent(DisplayObject source, DisplayObject other, boolean isTrigger) {
-		super(COLLISION, source);
+		super(isTrigger ? TRIGGER : COLLISION, source);
 		this.source = source;
 		this.other = other;
 		this.isTrigger = isTrigger;

@@ -11,6 +11,8 @@ import edu.virginia.engine.display.DisplayObject;
  *
  */
 public class PhysicsManager {
+	private static boolean fullSimulation = false;
+
 	private Point2D.Double gravity = new Point2D.Double();
 	private ArrayList<PhysicsObject> objects = new ArrayList<>();
 	private ArrayList<DisplayObject> triggers = new ArrayList<>();
@@ -25,35 +27,45 @@ public class PhysicsManager {
 			for (int j = i + 1; j < objects.size(); j++) {
 				PhysicsObject object2 = objects.get(j);
 				if (object.collidesWith(object2)) {
-					handleCollision(object.getSprite(), object2.getSprite(), false);
+					handleCollision(object, object2);
 				}
 			}
 			for (DisplayObject trigger : triggers) {
 				if (object.getSprite().collidesWith(trigger)) {
-					handleCollision(object.getSprite(), trigger, true);
+					object.getSprite().trigger(trigger);
+					trigger.trigger(object.getSprite());
 				}
 			}
 		}
 	}
 
-	private static void handleCollision(DisplayObject object1, DisplayObject object2, boolean isTrigger) {
-		Point2D disp = movRectOut(object1.getWorldBBox(), object2.getWorldBBox());
-		Direction dir;
-		if (disp.getX() < 0) 
-			dir = Direction.LEFT;
-		else if (disp.getX() > 0) 
-			dir = Direction.RIGHT;
-		else if (disp.getY() < 0) 
-			dir = Direction.UP;
-		else 
-			dir = Direction.DOWN;
-		if (isTrigger) {
-			object1.trigger(object2, dir);
-			object2.trigger(object1, dir);
-		} else {
-			object1.collision(object2, dir);
-			object2.collision(object1, dir);
+	private static void handleCollision(PhysicsObject object1, PhysicsObject object2) {
+		Point2D disp = resolveCollision(object1, object2);
+		if (fullSimulation) {
+			if (object1.isStatic()) {
+				staticCollision(object2, object1, disp.getY() != 0);
+			} else if (object2.isStatic()) {
+				staticCollision(object1, object2, disp.getY() != 0);
+			} else {
+				dynamicCollision(object1, object2, disp.getY() != 0);
+			}
 		}
+		Direction dir1, dir2;
+		if (disp.getX() < 0) {
+			dir1 = Direction.RIGHT;
+			dir2 = Direction.LEFT;
+		} else if (disp.getX() > 0) {
+			dir1 = Direction.LEFT;
+			dir2 = Direction.RIGHT;
+		} else if (disp.getY() < 0) {
+			dir1 = Direction.DOWN;
+			dir2 = Direction.UP;
+		} else {
+			dir1 = Direction.UP;
+			dir2 = Direction.DOWN;
+		}
+		object1.collision(object2, dir1);
+		object2.collision(object1, dir2);
 	}
 
 	public ArrayList<PhysicsObject> getCollisions(Rectangle2D r){
@@ -61,53 +73,48 @@ public class PhysicsManager {
 		return new ArrayList<PhysicsObject>();
 	}
 
-//	private static void staticCollision(PhysicsObject object1, PhysicsObject object2) {
-//		// object1 is dynamic, object2 is static
-//		boolean isVertical = resolveCollision(object1, object2);
-//		double CR = (object1.getBounciness() + object2.getBounciness()) / 2;
-//		Point2D v = object1.getVelocity();
-//		if (isVertical)
-//			object1.setVelocity(v.getX(), -CR * v.getY());
-//		else
-//			object1.setVelocity(-CR * v.getX(), v.getY());
-//	}
-//
-//	private static void dynamicCollision(PhysicsObject object1, PhysicsObject object2) {
-//		// Algorithm from https://en.wikipedia.org/wiki/Inelastic_collision
-//		boolean isVertical = resolveCollision(object1, object2);
-//		double CR = (object1.getBounciness() + object2.getBounciness()) / 2;
-//		double m1 = object1.getMass();
-//		double m2 = object2.getMass();
-//		Point2D v1 = object1.getVelocity();
-//		Point2D v2 = object2.getVelocity();
-//		double vi1 = isVertical ? v1.getY() : v1.getX();
-//		double vi2 = isVertical ? v2.getY() : v2.getX();
-//		double vf1 = (CR * m2 * (vi2 - vi1) + m1 * vi1 + m2 * vi2) / (m1 + m2);
-//		double vf2 = (CR * m1 * (vi1 - vi2) + m1 * vi1 + m2 * vi2) / (m1 + m2);
-//		if (isVertical) {
-//			object1.setVelocity(v1.getX(), vf1);
-//			object2.setVelocity(v2.getX(), vf2);
-//		} else {
-//			object1.setVelocity(vf1, v1.getY());
-//			object2.setVelocity(vf2, v2.getY());
-//		}
-//	}
+	private static void staticCollision(PhysicsObject object1, PhysicsObject object2, boolean isVertical) {
+		// object1 is dynamic, object2 is static
+		double CR = (object1.getBounciness() + object2.getBounciness()) / 2;
+		Point2D v = object1.getVelocity();
+		if (isVertical)
+			object1.setVelocity(v.getX(), -CR * v.getY());
+		else
+			object1.setVelocity(-CR * v.getX(), v.getY());
+	}
 
-//	private static boolean resolveCollision(PhysicsObject object1, PhysicsObject object2) {
-//		Point2D disp = movRectOut(object1.getWorldBBox(), object2.getWorldBBox());
-//		if (object2.isStatic()) {
-//			object1.getSprite().move(disp);
-//		} else {
-//			object1.getSprite().move(disp.getX() / 2, disp.getY() / 2);
-//			object2.getSprite().move(-disp.getX() / 2, -disp.getY() / 2);
-//		}
-//		if (disp.getY() < 0) {
-//			object1.ground();
-//		} else if (disp.getY() > 0 && !object2.isStatic()) {
-//			object2.ground();
-//		}
-//		return disp.getY() != 0;
-//	}
+	private static void dynamicCollision(PhysicsObject object1, PhysicsObject object2, boolean isVertical) {
+		// Algorithm from https://en.wikipedia.org/wiki/Inelastic_collision
+		double CR = (object1.getBounciness() + object2.getBounciness()) / 2;
+		double m1 = object1.getMass();
+		double m2 = object2.getMass();
+		Point2D v1 = object1.getVelocity();
+		Point2D v2 = object2.getVelocity();
+		double vi1 = isVertical ? v1.getY() : v1.getX();
+		double vi2 = isVertical ? v2.getY() : v2.getX();
+		double vf1 = (CR * m2 * (vi2 - vi1) + m1 * vi1 + m2 * vi2) / (m1 + m2);
+		double vf2 = (CR * m1 * (vi1 - vi2) + m1 * vi1 + m2 * vi2) / (m1 + m2);
+		if (isVertical) {
+			object1.setVelocity(v1.getX(), vf1);
+			object2.setVelocity(v2.getX(), vf2);
+		} else {
+			object1.setVelocity(vf1, v1.getY());
+			object2.setVelocity(vf2, v2.getY());
+		}
+	}
+
+	private static Point2D resolveCollision(PhysicsObject object1, PhysicsObject object2) {
+		Point2D disp = movRectOut(object1.getWorldBBox(), object2.getWorldBBox());
+		if (object2.isStatic()) {
+			object1.getSprite().move(disp);
+		} else if (object1.isStatic()) {
+			object2.getSprite().move(-disp.getX(), -disp.getY());
+		} else {
+			object1.getSprite().move(disp.getX() / 2, disp.getY() / 2);
+			object2.getSprite().move(-disp.getX() / 2, -disp.getY() / 2);
+		}
+		return disp;
+	}
 
 	private static Point2D movRectOut(Rectangle2D r1, Rectangle2D r2) {
 		double du = r1.getMaxY() - r2.getMinY();

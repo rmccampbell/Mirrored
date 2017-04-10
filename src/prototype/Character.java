@@ -38,8 +38,8 @@ public class Character extends AnimatedSprite {
 	}
 	
 	@Override
-	public void trigger(DisplayObject other, Direction dir) {
-		super.trigger(other, dir);
+	public void trigger(DisplayObject other) {
+		super.trigger(other);
 		if (other instanceof Ground) {
 			onGround = true;
 		}

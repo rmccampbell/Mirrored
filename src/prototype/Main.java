@@ -3,13 +3,11 @@ package prototype;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.particles.ParticleManager;
 import edu.virginia.engine.physics.PhysicsManager;
 
 public class Main extends Game {
 	
 	PhysicsManager physicsMan;
-	ParticleManager particleMan;
 	static int gameWidth = 1000;
 	static int gameHeight = 800;
 
@@ -30,23 +28,19 @@ public class Main extends Game {
 		addWall(100, 100, 100, 100);
 		
 		// players
-		Player player1 = new Player(false, (0.25) * gameWidth, 200, this);
-		Player player2 = new Player(true, (0.75) * gameWidth, 200, this);
+		Player player1 = new Player(false, (0.25) * gameWidth, 600, this);
+		Player player2 = new Player(true, (0.75) * gameWidth, 600, this);
 		player1.setOtherPlayer(player2);
 		player2.setOtherPlayer(player1);
 		physicsMan.addObject(player1);
 		physicsMan.addObject(player2); 
-
-		// particles
-//		particleMan = new ParticleManager();
-//		ParticleSystem test = new ParticleSystem("test");
-//		test.create(10);
-//		this.addChild(test);
-//		particleMan.add(test);
+		
+		Switch switch1 = new Switch("switch1", 700, 500, this);
+		physicsMan.addTrigger(switch1);
 		
 		// enemies
-		Enemy e = addEnemy("e", "coin.png", "homing", player1);
-		e.setPosition(100,300);
+//		Enemy e = addEnemy("e", "coin.png", "homing", player1);
+//		e.setPosition(100,300);
 	}
 	
 	@Override

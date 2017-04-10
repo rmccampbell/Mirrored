@@ -24,9 +24,9 @@ public class Enemy extends Character {
 	
 	public Enemy(String id, String fileName, String type, DisplayObjectContainer parent, Player target) {
 		super(id, fileName, 1, 1);
+		parent.addChild(this);
 		addAnimation("stand", 0, 1);
 		setAnimation("stand");
-		parent.addChild(this);
 		physics = addPhysics();
 		this.type = type;
 		this.target = target;

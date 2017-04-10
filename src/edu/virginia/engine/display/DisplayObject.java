@@ -374,7 +374,7 @@ public class DisplayObject extends EventDispatcher {
 		dispatchEvent(new CollisionEvent(this, other, false));
 	}
 
-	public void trigger(DisplayObject other, Direction dir) {
+	public void trigger(DisplayObject other) {
 		dispatchEvent(new CollisionEvent(this, other, true));
 	}
 

@@ -1,6 +1,7 @@
 package prototype;
 
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
@@ -14,12 +15,11 @@ public class Player extends Character {
 	private boolean isSynced = true;
 	private boolean isRight;
 	private Player otherPlayer;
-	private int health;
 
 	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
 		super("player" + (isRight ? "1" : "2"), "mario_run.png", 1, 2);
-		this.isRight = isRight;
 		parent.addChild(this);
+		this.isRight = isRight;
 		setPosition(x, y);
 		setFlipped(isRight);
 		addAnimation("stand", 0, 1);
@@ -71,7 +71,11 @@ public class Player extends Character {
 	public void collision(DisplayObject other, Direction dir) {
 		super.collision(other, dir);
 		if (isSynced)
-			otherPlayer.handleCollision(dir);
+			otherPlayer.setPosition(mirrored(getPosition()));
 	}
 	
+	private static Point2D mirrored(Point2D position) {
+		return new Point2D.Double(Main.gameWidth - position.getX(), position.getY());
+	}
+
 }

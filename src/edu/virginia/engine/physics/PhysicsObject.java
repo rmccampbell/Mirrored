@@ -17,7 +17,6 @@ public class PhysicsObject {
 	private Point2D.Double accel = new Point2D.Double();
 	private double mass = 1.0;
 	private double bounciness = 0.0;
-	private boolean grounded;
 
 	public PhysicsObject(DisplayObject sprite) {
 		this.sprite = sprite;
@@ -79,11 +78,11 @@ public class PhysicsObject {
 	}
 	
 	public double getXVelocity() {
-		return velocity.getX();
+		return velocity.x;
 	}
 	
 	public double getYVelocity() {
-		return velocity.getY();
+		return velocity.y;
 	}
 	
 	public void setVelocity(double vx, double vy) {
@@ -95,7 +94,15 @@ public class PhysicsObject {
 	public void setVelocity(Point2D vel) {
 		setVelocity(vel.getX(), vel.getY());
 	}
-
+	
+	public void setXVelocity(double vx) {
+		velocity.x = vx;
+	}
+	
+	public void setYVelocity(double vy) {
+		velocity.y = vy;
+	}
+	
 	public Point2D getAcceleration() {
 		return accel;
 	}
@@ -116,7 +123,6 @@ public class PhysicsObject {
 			velocity.y = Math.min(velocity.y, MAX_VELOCITY);
 			sprite.move(velocity);
 			accel.x = accel.y = 0;
-			grounded = false;
 		}
 	}
 
@@ -144,14 +150,6 @@ public class PhysicsObject {
 	
 	public void collision(PhysicsObject other, Direction dir) {
 		sprite.collision(other.sprite, dir);
-	}
-
-	public void ground() {
-		grounded = true;
-	}
-	
-	public boolean isGrounded() {
-		return grounded;
 	}
 
 }
