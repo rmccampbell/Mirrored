@@ -17,7 +17,7 @@ public class Player extends Character {
 	private Player otherPlayer;
 
 	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
-		super("player" + (isRight ? "1" : "2"), "mario_run.png", 1, 2);
+		super("player" + (isRight ? "2" : "1"), "mario_run.png", 1, 2);
 		parent.addChild(this);
 		this.isRight = isRight;
 		setPosition(x, y);

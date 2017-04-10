@@ -70,18 +70,21 @@ public class Main extends Game implements IEventListener{
 		return e;
 	}
 	
-	public static void main(String[] args) {
-		Main main = new Main();
-		main.start();
-	}
-
 	@Override
 	public void handleEvent(Event event) {
 		if(event.getType().equals(SwitchEvent.EVENT_TYPE)){
-			if(((DisplayObject)event.getSource()).getId().equals("switch1")){
-				
+			DisplayObject obj = ((DisplayObject)event.getSource());
+			if (obj.getId().equals("switch1")) {
+				addGround(250, 375, 100, 100);
+			}
+			else if (obj.getId().equals("switch2")) {
 			}
 		}
 	}
 
+	public static void main(String[] args) {
+		Main main = new Main();
+		main.start();
+	}
+	
 }

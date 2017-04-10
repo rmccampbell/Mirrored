@@ -3,6 +3,7 @@ package edu.virginia.engine.physics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import edu.virginia.engine.display.DisplayObject;
 
@@ -11,16 +12,21 @@ import edu.virginia.engine.display.DisplayObject;
  *
  */
 public class PhysicsManager {
-	private static boolean fullSimulation = false;
+	private static boolean fullCollisions = false;
 
 	private Point2D.Double gravity = new Point2D.Double();
 	private ArrayList<PhysicsObject> objects = new ArrayList<>();
 	private ArrayList<DisplayObject> triggers = new ArrayList<>();
 
 	public void update() {
-		for (PhysicsObject object : objects) {
-			object.accelerate(gravity);
-			object.update();
+		for (Iterator<PhysicsObject> iterator = objects.iterator(); iterator.hasNext();) {
+			PhysicsObject object = iterator.next();
+			if (object.getSprite().isAlive()) {
+				object.accelerate(gravity);
+				object.update();
+			} else {
+				iterator.remove();
+			}
 		}
 		for (int i = 0; i < objects.size(); i++) {
 			PhysicsObject object = objects.get(i);
@@ -30,7 +36,8 @@ public class PhysicsManager {
 					handleCollision(object, object2);
 				}
 			}
-			for (DisplayObject trigger : triggers) {
+			for (int j = 0; j < triggers.size(); j++) {
+				DisplayObject trigger = triggers.get(j);
 				if (object.getSprite().collidesWith(trigger)) {
 					object.getSprite().trigger(trigger);
 					trigger.trigger(object.getSprite());
@@ -41,7 +48,7 @@ public class PhysicsManager {
 
 	private static void handleCollision(PhysicsObject object1, PhysicsObject object2) {
 		Point2D disp = resolveCollision(object1, object2);
-		if (fullSimulation) {
+		if (fullCollisions) {
 			if (object1.isStatic()) {
 				staticCollision(object2, object1, disp.getY() != 0);
 			} else if (object2.isStatic()) {
