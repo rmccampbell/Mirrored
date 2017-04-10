@@ -3,7 +3,6 @@ package prototype;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.physics.CollisionEvent;
 
 public class Switch extends Sprite {
 	

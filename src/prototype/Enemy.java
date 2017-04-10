@@ -1,13 +1,9 @@
 package prototype;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
-import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.physics.CollisionEvent;
 import edu.virginia.engine.physics.Direction;
 import edu.virginia.engine.physics.PhysicsObject;
 
@@ -17,6 +13,7 @@ public class Enemy extends Character {
 	private Player target;
 	private double time = 0;
 	private PhysicsObject physics;
+	private double speed = 1;
 	
 	public Enemy(String id) {
 		super(id);
@@ -30,9 +27,9 @@ public class Enemy extends Character {
 		physics = addPhysics();
 		this.type = type;
 		this.target = target;
-		if(this.type=="staticX") physics.setVelocity(1, 0);
-		if(this.type=="staticY") physics.setVelocity(0, 1);
-		if(this.type=="homing") physics.setVelocity(1, 1);
+		if(this.type.equals("staticX")) physics.setVelocity(speed, 0);
+		if(this.type.equals("staticY")) physics.setVelocity(0, speed);
+		if(this.type.equals("homing")) physics.setVelocity(0, 0);
 	}
 	
 	public void setTarget(Player p){
@@ -47,7 +44,7 @@ public class Enemy extends Character {
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);		
-		if(type=="homing") moveTowards();
+		if(type.equals("homing")) moveTowards();
 	}
 
 	public void moveTowards(){
@@ -58,7 +55,7 @@ public class Enemy extends Character {
 		double xDistance = targetX - thisX;
 		double yDistance = targetY - thisY;
 		double h = Math.sqrt(xDistance*xDistance + yDistance*yDistance);
-		physics.setVelocity(1*xDistance/h, 1*yDistance/h);
+		physics.setVelocity(speed*xDistance/h, speed*yDistance/h);
 	}
 	
 	@Override
