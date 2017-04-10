@@ -47,19 +47,14 @@ public class Enemy extends Character {
 	}
 
 	public void moveTowards(){
-		int x = 0, y = 0;
-		if(target.getX() > this.getX()){
-			physics.setVelocity(Math.abs(physics.getXVelocity()), physics.getYVelocity());
-		}
-		else if(target.getX() < this.getX()){
-			physics.setVelocity(Math.abs(physics.getXVelocity())*-1, physics.getYVelocity());
-		}
-		if(target.getY() < this.getY()){
-			physics.setVelocity(physics.getXVelocity(), Math.abs(physics.getYVelocity())*-1);
-		}
-		else if(target.getY() > this.getY()){
-			physics.setVelocity(physics.getXVelocity(), Math.abs(physics.getYVelocity()));
-		}
+		double targetX = target.getX();
+		double targetY = target.getY();
+		double thisX = this.getX();
+		double thisY = this.getY();
+		double xDistance = targetX - thisX;
+		double yDistance = targetY - thisY;
+		double h = Math.sqrt(xDistance*xDistance + yDistance*yDistance);
+		physics.setVelocity(1*xDistance/h, 1*yDistance/h);
 	}
 	
 	@Override
