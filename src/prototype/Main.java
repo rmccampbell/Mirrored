@@ -21,9 +21,13 @@ public class Main extends Game implements IEventListener{
 		// level 1
 		addGround(gameWidth/2, gameHeight/4-50, gameWidth, 350);
 		addGround(gameWidth/2, (3*gameHeight/4), gameWidth, 350);
+		addGround(750, 375, 100, 100);
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		physicsMan.addTrigger(switch1);
 		switch1.addEventListener(this, SwitchEvent.EVENT_TYPE);
+		Switch switch2 = new Switch("switch2", 600, 700, this);
+		physicsMan.addTrigger(switch2);
+		switch2.addEventListener(this, SwitchEvent.EVENT_TYPE);		
 		
 		// boundaries 
 		addWall(gameWidth/2, gameHeight/2, 20, gameHeight);
@@ -41,8 +45,8 @@ public class Main extends Game implements IEventListener{
 		physicsMan.addObject(player2); 
 		
 		// enemies
-		Enemy e = addEnemy("e", "coin.png", "staticX", player1);
-		e.setPosition(500,500);
+		Enemy enemy1 = addEnemy("enemy1", "coin.png", "staticX", player1);
+		enemy1.setPosition(500,500);
 		
 	}
 	
@@ -76,9 +80,11 @@ public class Main extends Game implements IEventListener{
 		if(event.getType().equals(SwitchEvent.EVENT_TYPE)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
-				addGround(250, 375, 100, 100);
+				TrapDoor trap = new TrapDoor(900, 500, this);
+				physicsMan.addObject(trap);
 			}
 			else if (obj.getId().equals("switch2")) {
+				addGround(250, 375, 100, 100);
 			}
 		}
 	}
