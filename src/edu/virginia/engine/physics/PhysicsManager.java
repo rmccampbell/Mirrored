@@ -69,8 +69,15 @@ public class PhysicsManager {
 	}
 
 	public ArrayList<PhysicsObject> getCollisions(Rectangle2D r){
-		//TODO
-		return new ArrayList<PhysicsObject>();
+		ArrayList<PhysicsObject> collided = new ArrayList<PhysicsObject>();
+
+		for (PhysicsObject o : objects) {
+			if( o.getWorldBBox().intersects(r)){
+				collided.add(o);
+			}
+		}
+
+		return collided;
 	}
 
 	private static void staticCollision(PhysicsObject object1, PhysicsObject object2, boolean isVertical) {

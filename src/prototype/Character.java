@@ -53,20 +53,25 @@ public class Character extends AnimatedSprite {
 		return health;
 	}
 
-	protected Rectangle2D getAttackBox(){
-		//TODO
+	protected Rectangle2D getAttackBox(double attackRadius){
+		Rectangle2D attack = new Rectangle2D.Double();
+
 		switch (facing){
 			case LEFT:
+				attack = new Rectangle2D.Double(this.getX() - attackRadius, this.getY() - attackRadius, attackRadius, 2*attackRadius );
 				break;
 			case RIGHT:
+				attack = new Rectangle2D.Double(this.getX(), this.getY() - attackRadius, attackRadius, 2*attackRadius );
 				break;
 			case UP:
+				attack = new Rectangle2D.Double(this.getX() - attackRadius, this.getY() - attackRadius, 2 * attackRadius, attackRadius );
 				break;
 			case DOWN:
+				attack = new Rectangle2D.Double(this.getX() - attackRadius, this.getY(), 2 * attackRadius, attackRadius );
 				break;
 		}
 
-		return new Rectangle2D.Double(0, 0, 0, 0);
+		return attack;
 	}
 
 }
