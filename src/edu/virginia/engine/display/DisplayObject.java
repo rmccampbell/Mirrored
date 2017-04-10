@@ -370,7 +370,6 @@ public class DisplayObject extends EventDispatcher {
 	}
 	
 	public void collision(DisplayObject other, Direction dir) {
-		resetPosition(true, true);
 		dispatchEvent(new CollisionEvent(this, other, false));
 	}
 
