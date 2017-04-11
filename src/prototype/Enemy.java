@@ -37,7 +37,7 @@ public class Enemy extends Character {
 	}
 	
 	@Override
-	protected void die() {
+	public void die() {
 		super.die();
 	}
 	
@@ -68,7 +68,7 @@ public class Enemy extends Character {
 			physics.setVelocity(physics.getXVelocity(), physics.getYVelocity()*-1);
 		}
 		if(other==target){
-			dispatchEvent(new GameOverEvent(this));
+			target.die();
 		}
 	}
 }

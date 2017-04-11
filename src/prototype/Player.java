@@ -68,7 +68,7 @@ public class Player extends Character {
 	}
 
 	@Override
-	protected void die() {
+	public void die() {
 		super.die();
 		dispatchEvent(new GameOverEvent(this));
 	}

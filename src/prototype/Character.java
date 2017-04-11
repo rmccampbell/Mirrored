@@ -33,7 +33,7 @@ public class Character extends AnimatedSprite {
 		die();
 	}
 	
-	protected void die() {
+	public void die() {
 		System.out.println(this + " died :(");
 		destroy();
 	}
