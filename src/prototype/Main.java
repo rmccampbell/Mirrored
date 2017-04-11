@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.Game;
+import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
@@ -41,14 +42,20 @@ public class Main extends Game implements IEventListener{
 		Player player2 = new Player(true, (0.95) * gameWidth, 700, this);
 		player1.setOtherPlayer(player2);
 		player2.setOtherPlayer(player1);
+
+		player1.addEventListener(this, GameOverEvent.EVENT_TYPE);
+		player2.addEventListener(this, GameOverEvent.EVENT_TYPE);
+
 		player1.setzOrder(1);
 		player2.setzOrder(1);
+
 		physicsMan.addObject(player1);
 		physicsMan.addObject(player2); 
 		
 		// enemies
-		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "staticX", player1);
+		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "staticX", player2);
 		enemy1.setPosition(500,500);
+		enemy1.addEventListener(this, GameOverEvent.EVENT_TYPE);
 		
 	}
 	
@@ -88,6 +95,11 @@ public class Main extends Game implements IEventListener{
 			else if (obj.getId().equals("switch2")) {
 				addGround(250, 375, 100, 100);
 			}
+		}
+		if(event.getType().equals(GameOverEvent.EVENT_TYPE)){
+			Sprite gameover = new Sprite("gameover", "gameover.png");
+			gameover.setPosition(500, 400);
+			this.addChild(gameover);
 		}
 	}
 
