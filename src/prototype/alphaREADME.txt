@@ -1,3 +1,5 @@
+Mdk6jd, Rnm6u, Lmh2sb
+
 For our alpha, our main goal was to implement the mechanics involving enemies, switches, and dying.
 
 To beat the level, the player must get to the exit door in the top corner.
