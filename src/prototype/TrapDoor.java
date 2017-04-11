@@ -14,8 +14,11 @@ public class TrapDoor extends Sprite{
 	}
 
 	@Override
-	public void collision(DisplayObject other, Direction dir) {
-		super.collision(other, dir);
-		other.destroy();
+	public void trigger(DisplayObject other) {
+		super.trigger(other);
+		if (other instanceof Character) {
+			System.out.println(other + " fell in trapdoor");
+			((Character) other).die();
+		}
 	}
 }
