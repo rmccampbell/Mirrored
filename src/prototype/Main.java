@@ -99,7 +99,8 @@ public class Main extends Game implements IEventListener{
 		if(event.getType().equals(GameOverEvent.EVENT_TYPE)){
 			Sprite gameover = new Sprite("gameover", "gameover.png");
 			gameover.setPosition(500, 400);
-			this.addChild(gameover);
+			gameover.setzOrder(1);
+			this.addChildConcurrent(gameover);
 		}
 	}
 

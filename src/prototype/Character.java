@@ -34,7 +34,7 @@ public class Character extends AnimatedSprite {
 	}
 	
 	protected void die() {
-		//dispatchEvent(new GameOverEvent(this));
+		dispatchEvent(new GameOverEvent(this));
 		System.out.println(this + " died :(");
 		destroy();
 	}
