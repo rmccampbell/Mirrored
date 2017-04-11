@@ -61,7 +61,7 @@ public class Character extends AnimatedSprite {
 				attack = new Rectangle2D.Double(this.getX() - attackRadius, this.getY() - attackRadius, attackRadius, 2*attackRadius );
 				break;
 			case RIGHT:
-				attack = new Rectangle2D.Double(this.getX(), this.getY() - attackRadius, attackRadius, 2*attackRadius );
+				attack = new Rectangle2D.Double(this.getX(), this.getY() - attackRadius, attackRadius, 2 * attackRadius );
 				break;
 			case UP:
 				attack = new Rectangle2D.Double(this.getX() - attackRadius, this.getY() - attackRadius, 2 * attackRadius, attackRadius );

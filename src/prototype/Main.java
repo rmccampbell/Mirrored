@@ -41,6 +41,8 @@ public class Main extends Game implements IEventListener{
 		Player player2 = new Player(true, (0.95) * gameWidth, 700, this);
 		player1.setOtherPlayer(player2);
 		player2.setOtherPlayer(player1);
+		player1.setzOrder(1);
+		player2.setzOrder(1);
 		physicsMan.addObject(player1);
 		physicsMan.addObject(player2); 
 		

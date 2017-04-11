@@ -44,6 +44,7 @@ public class DisplayObject extends EventDispatcher {
 	private double rotation = 0.0;
 	private boolean flipped = false;
 	private float alpha = 1.0f;
+	private int zOrder = 0;
 	
 	private Rectangle2D.Double bbox = new Rectangle2D.Double();
 	
@@ -399,5 +400,13 @@ public class DisplayObject extends EventDispatcher {
 	
 	public void destroy() {
 		isAlive = false;
+	}
+
+	public int getzOrder(){
+		return this.zOrder;
+	}
+
+	public void setzOrder(int z){
+		this.zOrder = z;
 	}
 }
