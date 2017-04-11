@@ -68,7 +68,7 @@ public class Enemy extends Character {
 			physics.setVelocity(physics.getXVelocity(), physics.getYVelocity()*-1);
 		}
 		if(other==target){
-			target.setHealth(target.getHealth()-10);
+			dispatchEvent(new GameOverEvent(this));
 		}
 	}
 }
