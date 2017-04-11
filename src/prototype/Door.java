@@ -21,7 +21,7 @@ public class Door extends AnimatedSprite {
 	public void trigger(DisplayObject other) {
 		super.trigger(other);
 		if (other instanceof Player) {
-			dispatchEvent(new Event("door", this));
+			dispatchEvent(new WinEvent(this));
 		}
 	}
 }

@@ -36,7 +36,7 @@ public class Main extends Game implements IEventListener{
 		addWall(gameWidth-5, gameHeight/2, 20, gameHeight);
 		addWall(gameWidth/2, 0, gameWidth, 20);
 		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
-		
+
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);
 		Player player2 = new Player(true, (0.95) * gameWidth, 700, this);
@@ -53,16 +53,23 @@ public class Main extends Game implements IEventListener{
 		physicsMan.addObject(player2); 
 		
 		// doors
-		Doors door1 = new Doors("door1", 50, 80, this);
-		door1.setScaleX(0.5);
-		door1.setScaleY(0.5);
-		physicsMan.addObject(door1);
+		Door door1 = new Door(200, 100, this);
+		physicsMan.addTrigger(door1);
 		door1.addEventListener(this, WinEvent.EVENT_TYPE);
-		Doors door2 = new Doors("door2", gameWidth-50, 80, this);
-		door2.setScaleX(0.5);
-		door2.setScaleY(0.5);
-		physicsMan.addObject(door2);
+		Door door2 = new Door(800, 100, this);
+		physicsMan.addTrigger(door2);
 		door2.addEventListener(this, WinEvent.EVENT_TYPE);
+		
+//		Doors door1 = new Doors("door1", 50, 80, this);
+//		door1.setScaleX(0.5);
+//		door1.setScaleY(0.5);
+//		physicsMan.addObject(door1);
+//		door1.addEventListener(this, WinEvent.EVENT_TYPE);
+//		Doors door2 = new Doors("door2", gameWidth-50, 80, this);
+//		door2.setScaleX(0.5);
+//		door2.setScaleY(0.5);
+//		physicsMan.addObject(door2);
+//		door2.addEventListener(this, WinEvent.EVENT_TYPE);
 		
 		// enemies
 		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "staticX", player2);
@@ -115,10 +122,10 @@ public class Main extends Game implements IEventListener{
 			this.addChildConcurrent(gameover);
 		}
 		if(event.getType().equals(WinEvent.EVENT_TYPE)){
-			Sprite gameover = new Sprite("win", "win.png");
-			gameover.setPosition(500, 400);
-			gameover.setzOrder(1);
-			this.addChildConcurrent(gameover);
+			Sprite win = new Sprite("win", "win.png");
+			win.setPosition(500, 400);
+			win.setzOrder(1);
+			this.addChildConcurrent(win);
 		}
 	}
 
