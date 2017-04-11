@@ -4,11 +4,11 @@ import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
 
-public class Door extends Sprite{
+public class Doors extends Sprite{
 	
 	private boolean activated = false;
 
-	public Door(String id, double x, double y, DisplayObjectContainer parent) {
+	public Doors(String id, double x, double y, DisplayObjectContainer parent) {
 		super(id, "door.png");
 		parent.addChild(this);
 		setPosition(x, y);

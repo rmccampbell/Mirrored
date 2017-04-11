@@ -53,12 +53,12 @@ public class Main extends Game implements IEventListener{
 		physicsMan.addObject(player2); 
 		
 		// doors
-		Door door1 = new Door("door1", 50, 80, this);
+		Doors door1 = new Doors("door1", 50, 80, this);
 		door1.setScaleX(0.5);
 		door1.setScaleY(0.5);
 		physicsMan.addObject(door1);
 		door1.addEventListener(this, WinEvent.EVENT_TYPE);
-		Door door2 = new Door("door2", gameWidth-50, 80, this);
+		Doors door2 = new Doors("door2", gameWidth-50, 80, this);
 		door2.setScaleX(0.5);
 		door2.setScaleY(0.5);
 		physicsMan.addObject(door2);
