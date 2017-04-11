@@ -66,6 +66,12 @@ public class Player extends Character {
 	public void handleCollision(Direction dir) {
 		resetPosition(true, true);
 	}
+
+	@Override
+	protected void die() {
+		super.die();
+		dispatchEvent(new GameOverEvent(this));
+	}
 	
 	@Override
 	public void collision(DisplayObject other, Direction dir) {
