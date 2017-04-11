@@ -35,6 +35,7 @@ public class Character extends AnimatedSprite {
 	
 	protected void die() {
 		System.out.println(this + " died :(");
+		destroy();
 	}
 	
 	@Override

@@ -83,7 +83,7 @@ public class Main extends Game implements IEventListener{
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
 				TrapDoor trap = new TrapDoor(900, 500, this);
-				physicsMan.addObject(trap);
+				physicsMan.addTrigger(trap);
 			}
 			else if (obj.getId().equals("switch2")) {
 				addGround(250, 375, 100, 100);
