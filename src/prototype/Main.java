@@ -37,15 +37,15 @@ public class Main extends Game implements IEventListener{
 		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
 		
 		// players
-		Player player1 = new Player(false, (0.25) * gameWidth, 600, this);
-		Player player2 = new Player(true, (0.75) * gameWidth, 600, this);
+		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);
+		Player player2 = new Player(true, (0.95) * gameWidth, 700, this);
 		player1.setOtherPlayer(player2);
 		player2.setOtherPlayer(player1);
 		physicsMan.addObject(player1);
 		physicsMan.addObject(player2); 
 		
 		// enemies
-		Enemy enemy1 = addEnemy("enemy1", "coin.png", "staticX", player1);
+		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "staticX", player1);
 		enemy1.setPosition(500,500);
 		
 	}
