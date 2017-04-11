@@ -7,16 +7,15 @@ import java.util.Iterator;
 
 public class DisplayObjectContainer extends DisplayObject {
 
-	private ArrayList<DisplayObject> children;
+	private ArrayList<DisplayObject> children = new ArrayList<>();
+	private ArrayList<DisplayObject> newChildren = new ArrayList<>();
 
 	public DisplayObjectContainer(String id) {
 		super(id);
-		children = new ArrayList<>();
 	}
 
 	public DisplayObjectContainer(String id, String fileName) {
 		super(id, fileName);
-		children = new ArrayList<>();
 	}
 	
 	@Override
@@ -35,7 +34,14 @@ public class DisplayObjectContainer extends DisplayObject {
 			if (!child.isAlive())
 				iterator.remove();
 		}
+		children.addAll(newChildren);
+		newChildren.clear();
 		children.sort(Comparator.comparingInt(DisplayObject::getzOrder));
+	}
+	
+	public void addChildConcurrent(DisplayObject child) {
+		newChildren.add(child);
+		child.setParent(this);
 	}
 	
 	public void addChild(DisplayObject child) {
