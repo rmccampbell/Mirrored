@@ -2,6 +2,7 @@ package edu.virginia.engine.display;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class DisplayObjectContainer extends DisplayObject {
@@ -34,6 +35,7 @@ public class DisplayObjectContainer extends DisplayObject {
 			if (!child.isAlive())
 				iterator.remove();
 		}
+		children.sort(Comparator.comparingInt(DisplayObject::getzOrder));
 	}
 	
 	public void addChild(DisplayObject child) {
