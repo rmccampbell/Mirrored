@@ -38,7 +38,7 @@ public class Enemy extends Character {
 	
 	@Override
 	protected void die() {
-		this.destroy();
+		super.die();
 	}
 	
 	@Override

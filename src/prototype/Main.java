@@ -37,6 +37,13 @@ public class Main extends Game implements IEventListener{
 		addWall(gameWidth/2, 0, gameWidth, 20);
 		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
 		
+		Door door1 = new Door(200, 100, this);
+		physicsMan.addTrigger(door1);
+		door1.addEventListener(this, "door");
+		Door door2 = new Door(800, 100, this);
+		physicsMan.addTrigger(door2);
+		door2.addEventListener(this, "door");
+		
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);
 		Player player2 = new Player(true, (0.95) * gameWidth, 700, this);
@@ -101,6 +108,19 @@ public class Main extends Game implements IEventListener{
 			gameover.setPosition(500, 400);
 			gameover.setzOrder(1);
 			this.addChildConcurrent(gameover);
+		}
+		if(event.getType().equals(GameOverEvent.EVENT_TYPE)){
+			Sprite gameover = new Sprite("gameover", "gameover.png");
+			gameover.setPosition(500, 400);
+			gameover.setzOrder(1);
+			this.addChildConcurrent(gameover);
+		}
+		if(event.getType().equals("door")){
+			System.out.println("Win!!1");
+//			Sprite winscreen = new Sprite("win", "gameover.png");
+//			winscreen.setPosition(500, 400);
+//			winscreen.setzOrder(1);
+//			this.addChildConcurrent(winscreen);
 		}
 	}
 
