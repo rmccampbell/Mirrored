@@ -52,6 +52,18 @@ public class Main extends Game implements IEventListener{
 		physicsMan.addObject(player1);
 		physicsMan.addObject(player2); 
 		
+		// doors
+		Door door1 = new Door("door1", 50, 80, this);
+		door1.setScaleX(0.5);
+		door1.setScaleY(0.5);
+		physicsMan.addObject(door1);
+		door1.addEventListener(this, WinEvent.EVENT_TYPE);
+		Door door2 = new Door("door2", gameWidth-50, 80, this);
+		door2.setScaleX(0.5);
+		door2.setScaleY(0.5);
+		physicsMan.addObject(door2);
+		door2.addEventListener(this, WinEvent.EVENT_TYPE);
+		
 		// enemies
 		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "staticX", player2);
 		enemy1.setPosition(500,500);
@@ -98,6 +110,12 @@ public class Main extends Game implements IEventListener{
 		}
 		if(event.getType().equals(GameOverEvent.EVENT_TYPE)){
 			Sprite gameover = new Sprite("gameover", "gameover.png");
+			gameover.setPosition(500, 400);
+			gameover.setzOrder(1);
+			this.addChildConcurrent(gameover);
+		}
+		if(event.getType().equals(WinEvent.EVENT_TYPE)){
+			Sprite gameover = new Sprite("win", "win.png");
 			gameover.setPosition(500, 400);
 			gameover.setzOrder(1);
 			this.addChildConcurrent(gameover);
