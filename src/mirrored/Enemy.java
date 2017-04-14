@@ -1,4 +1,4 @@
-package prototype;
+package mirrored;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,6 @@ public class Enemy extends Character {
 
 	private String type;
 	private Player target;
-	private double time = 0;
 	private PhysicsObject physics;
 	private double speed = 1;
 	

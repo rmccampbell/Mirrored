@@ -1,4 +1,4 @@
-package prototype;
+package mirrored;
 
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;

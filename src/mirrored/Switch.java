@@ -1,4 +1,4 @@
-package prototype;
+package mirrored;
 
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;

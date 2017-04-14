@@ -1,4 +1,4 @@
-package prototype;
+package mirrored;
 
 import java.awt.Graphics;
 
