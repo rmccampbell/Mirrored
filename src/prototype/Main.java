@@ -12,7 +12,7 @@ import edu.virginia.engine.physics.PhysicsManager;
 public class Main extends Game implements IEventListener{
 	
 	PhysicsManager physicsMan;
-	static int gameWidth = 1000;
+	static int gameWidth = 1200;
 	static int gameHeight = 800;
 
 	public Main() {
