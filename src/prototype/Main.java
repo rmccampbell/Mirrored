@@ -1,6 +1,8 @@
 package prototype;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.Game;
@@ -11,12 +13,19 @@ import edu.virginia.engine.physics.PhysicsManager;
 
 public class Main extends Game implements IEventListener{
 	
+	List<Class<? extends Level>> levels;
+	Level level;
+
 	PhysicsManager physicsMan;
 	static int gameWidth = 1200;
 	static int gameHeight = 800;
 
 	public Main() {
 		super("Prototype", gameWidth, gameHeight);
+
+		levels = Arrays.asList(Level1.class);
+		level = new Level1();
+		
 		physicsMan = new PhysicsManager();
 		
 		// level 1

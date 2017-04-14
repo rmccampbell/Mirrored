@@ -3,9 +3,6 @@ package prototype;
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
-import edu.virginia.engine.display.Sprite;
-import edu.virginia.engine.events.Event;
-import edu.virginia.engine.physics.Direction;
 
 public class Door extends AnimatedSprite {
 
