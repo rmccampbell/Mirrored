@@ -3,7 +3,6 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
@@ -20,10 +19,10 @@ public class Level1 extends Level implements IEventListener {
 		addGround(750, 375, 100, 100);
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		physicsManager.addTrigger(switch1);
-		switch1.addEventListener(this, SwitchEvent.EVENT_TYPE);
+		switch1.addEventListener(this, Events.SWITCH);
 		Switch switch2 = new Switch("switch2", 600, 700, this);
 		physicsManager.addTrigger(switch2);
-		switch2.addEventListener(this, SwitchEvent.EVENT_TYPE);		
+		switch2.addEventListener(this, Events.SWITCH);		
 		
 		// boundaries 
 		addWall(gameWidth/2, gameHeight/2, 20, gameHeight);
@@ -38,8 +37,8 @@ public class Level1 extends Level implements IEventListener {
 		player1.setOtherPlayer(player2);
 		player2.setOtherPlayer(player1);
 
-		player1.addEventListener(this, GameOverEvent.EVENT_TYPE);
-		player2.addEventListener(this, GameOverEvent.EVENT_TYPE);
+		player1.addEventListener(this, Events.DEATH);
+		player2.addEventListener(this, Events.DEATH);
 
 		player1.setzOrder(1);
 		player2.setzOrder(1);
@@ -50,10 +49,10 @@ public class Level1 extends Level implements IEventListener {
 		// doors
 		Door door1 = new Door(200, 100, this);
 		physicsManager.addTrigger(door1);
-		door1.addEventListener(this, WinEvent.EVENT_TYPE);
+		door1.addEventListener(this, Events.DOOR);
 		Door door2 = new Door(800, 100, this);
 		physicsManager.addTrigger(door2);
-		door2.addEventListener(this, WinEvent.EVENT_TYPE);
+		door2.addEventListener(this, Events.DOOR);
 		
 //		Doors door1 = new Doors("door1", 50, 80, this);
 //		door1.setScaleX(0.5);
@@ -69,11 +68,10 @@ public class Level1 extends Level implements IEventListener {
 		// enemies
 		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "homing", player2);
 		enemy1.setPosition(500,500);
-		enemy1.addEventListener(this, GameOverEvent.EVENT_TYPE);
+
 		Enemy enemy2 = addEnemy("enemy2", "ghost.png", "staticX", player1);
 		enemy2.setPosition(480,200);
-		enemy2.addEventListener(this, GameOverEvent.EVENT_TYPE);
-		
+
 	}
 	
 	@Override
@@ -103,7 +101,7 @@ public class Level1 extends Level implements IEventListener {
 	
 	@Override
 	public void handleEvent(Event event) {
-		if(event.getType().equals(SwitchEvent.EVENT_TYPE)){
+		if(event.getType().equals(Events.SWITCH)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
 				TrapDoor trap = new TrapDoor(900, 500, this);
@@ -113,17 +111,19 @@ public class Level1 extends Level implements IEventListener {
 				addGround(250, 375, 100, 100);
 			}
 		}
-		if(event.getType().equals(GameOverEvent.EVENT_TYPE)){
-			Sprite gameover = new Sprite("gameover", "gameover.png");
-			gameover.setPosition(500, 400);
-			gameover.setzOrder(1);
-			this.addChildConcurrent(gameover);
+		if(event.getType().equals(Events.DEATH)) {
+			Main.getInstance().resetLevel();
+//			Sprite gameover = new Sprite("gameover", "gameover.png");
+//			gameover.setPosition(500, 400);
+//			gameover.setzOrder(1);
+//			this.addChildConcurrent(gameover);
 		}
-		if(event.getType().equals(WinEvent.EVENT_TYPE)){
-			Sprite win = new Sprite("win", "win.png");
-			win.setPosition(500, 400);
-			win.setzOrder(1);
-			this.addChildConcurrent(win);
+		if(event.getType().equals(Events.DOOR)) {
+			Main.getInstance().nextLevel();
+//			Sprite win = new Sprite("win", "win.png");
+//			win.setPosition(500, 400);
+//			win.setzOrder(1);
+//			this.addChildConcurrent(win);
 		}
 	}
 

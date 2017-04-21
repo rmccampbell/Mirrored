@@ -3,6 +3,7 @@ package mirrored;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
+import edu.virginia.engine.events.Event;
 
 public class Switch extends Sprite {
 	
@@ -17,7 +18,7 @@ public class Switch extends Sprite {
 	private void activate() {
 		activated = true;
 		setImage("lever_on.png");
-		dispatchEvent(new SwitchEvent(this));
+		dispatchEvent(new Event(Events.SWITCH, this));
 		System.out.println("Switch triggered");
 	}
 	

@@ -3,6 +3,7 @@ package mirrored;
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
+import edu.virginia.engine.events.Event;
 
 public class Door extends AnimatedSprite {
 
@@ -18,7 +19,7 @@ public class Door extends AnimatedSprite {
 	public void trigger(DisplayObject other) {
 		super.trigger(other);
 		if (other instanceof Player) {
-			dispatchEvent(new WinEvent(this));
+			dispatchEvent(new Event(Events.DOOR, this));
 		}
 	}
 }
