@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
+import edu.virginia.engine.events.Event;
 import edu.virginia.engine.physics.Direction;
 
 public class Player extends Character {
@@ -70,7 +71,7 @@ public class Player extends Character {
 	@Override
 	public void die() {
 		super.die();
-		dispatchEvent(new GameOverEvent(this));
+		dispatchEvent(new Event(Events.DEATH, this));
 	}
 	
 	@Override

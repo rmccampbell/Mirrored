@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
 
-public class Ground extends Sprite {
+public class Ground extends TiledSprite {
 
 	public Ground(double x, double y, double width, double height, DisplayObjectContainer parent) {
 		super("ground", "floor_tiles.png");
