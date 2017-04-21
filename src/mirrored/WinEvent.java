@@ -6,7 +6,6 @@ import edu.virginia.engine.events.Event;
 
 public class WinEvent extends Event {
 
-
 	public static String EVENT_TYPE = "win";
 	
 	private DisplayObject source;
