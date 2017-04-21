@@ -66,8 +66,12 @@ public class Level1 extends Level implements IEventListener {
 //		door2.addEventListener(this, WinEvent.EVENT_TYPE);
 		
 		// enemies
-		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "staticX", player2);
+		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "homing", player2);
 		enemy1.setPosition(500,500);
+
+		Enemy enemy2 = addEnemy("enemy2", "ghost.png", "staticX", player1);
+		enemy2.setPosition(480,200);
+
 	}
 	
 	@Override

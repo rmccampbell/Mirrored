@@ -10,6 +10,7 @@ public class TrapDoor extends Sprite{
 		super("trapDoor", "hole.png");
 		parent.addChild(this);
 		setPosition(x, y);
+		setBBox(0,0, 40, 20);
 	}
 
 	@Override
