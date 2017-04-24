@@ -9,9 +9,10 @@ import edu.virginia.engine.physics.Direction;
 
 public class Character extends AnimatedSprite {
 	
-	boolean onGround = true;
-	private int health;
-	private Direction facing;
+	private boolean onGround = true;
+	protected int health;
+	protected Direction facing = Direction.DOWN;
+	protected boolean walking = false;
 
 	public Character(String id) {
 		super(id);
@@ -27,6 +28,20 @@ public class Character extends AnimatedSprite {
 		if (!onGround)
 			fall();
 		onGround = false;
+		switch (facing) {
+		case LEFT:
+			setAnimation(walking ? "walkLeft" : "standLeft");
+			break;
+		case RIGHT:
+			setAnimation(walking ? "walkRight" : "standRight");
+			break;
+		case UP:
+			setAnimation(walking ? "walkUp" : "standUp");
+			break;
+		case DOWN:
+			setAnimation(walking ? "walkDown" : "standDown");
+			break;
+		}
 	}
 	
 	private void fall() {
