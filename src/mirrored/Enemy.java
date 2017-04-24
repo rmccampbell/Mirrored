@@ -9,7 +9,7 @@ import edu.virginia.engine.physics.PhysicsObject;
 
 public class Enemy extends Character {
 
-	private String type;
+	private EnemyType type;
 	private Player target;
 	private PhysicsObject physics;
 	private double speed = 1;
@@ -18,7 +18,7 @@ public class Enemy extends Character {
 		super(id);
 	}
 	
-	public Enemy(String id, String fileName, String type, DisplayObjectContainer parent, Player target) {
+	public Enemy(String id, String fileName, EnemyType type, DisplayObjectContainer parent, Player target) {
 		super(id, fileName, 1, 1);
 		parent.addChild(this);
 		addAnimation("stand", 0, 1);
@@ -26,9 +26,17 @@ public class Enemy extends Character {
 		physics = addPhysics();
 		this.type = type;
 		this.target = target;
-		if(this.type.equals("staticX")) physics.setVelocity(speed, 0);
-		if(this.type.equals("staticY")) physics.setVelocity(0, speed);
-		if(this.type.equals("homing")) physics.setVelocity(0, 0);
+		switch (type) {
+		case staticX:
+			physics.setVelocity(speed, 0);
+			break;
+		case staticY:
+			physics.setVelocity(0, speed);
+			break;
+		case homing:
+			physics.setVelocity(0, 0);
+			break;
+		}
 	}
 	
 	public void setTarget(Player p){
@@ -43,7 +51,10 @@ public class Enemy extends Character {
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);		
-		if(type.equals("homing")) moveTowards();
+		switch (type) {
+		case homing:
+			moveTowards();
+		}
 	}
 
 	public void moveTowards(){

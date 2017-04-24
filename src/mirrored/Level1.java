@@ -3,6 +3,7 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
+import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
@@ -71,10 +72,10 @@ public class Level1 extends Level implements IEventListener {
 //		door2.addEventListener(this, WinEvent.EVENT_TYPE);
 		
 		// enemies
-		Enemy enemy1 = addEnemy("enemy1", "ghost.png", "homing", player2);
+		Enemy enemy1 = addEnemy("enemy1", "ghost.png", EnemyType.homing, player2);
 		enemy1.setPosition(500,500);
 
-		Enemy enemy2 = addEnemy("enemy2", "ghost.png", "staticX", player1);
+		Enemy enemy2 = addEnemy("enemy2", "ghost.png", EnemyType.staticX, player1);
 		enemy2.setPosition(480,200);
 
 	}
@@ -98,7 +99,7 @@ public class Level1 extends Level implements IEventListener {
 		return g;
 	}
 	
-	private Enemy addEnemy(String id, String fileName, String type, Player player){
+	private Enemy addEnemy(String id, String fileName, EnemyType type, Player player){
 		Enemy e = new Enemy(id, fileName, type, this, player);
 		physicsManager.addObject(e);
 		return e;
