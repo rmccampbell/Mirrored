@@ -24,6 +24,7 @@ public class Enemy extends Character {
 		addAnimation("stand", 0, 1);
 		setAnimation("stand");
 		physics = addPhysics();
+		Main.getInstance().getPhysicsManager().addObject(this);
 		this.type = type;
 		this.target = target;
 		switch (type) {

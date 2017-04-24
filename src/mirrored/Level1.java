@@ -3,39 +3,31 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
-import edu.virginia.engine.physics.PhysicsManager;
 
 public class Level1 extends Level implements IEventListener {
 
 	public Level1() {
 		super("Level 1");
-		physicsManager = new PhysicsManager();
+		physicsManager = Main.getInstance().getPhysicsManager();
+		physicsManager.clear();
 		
 		// level 1
-		addGround(0, -25, gameWidth, 350);
-		addGround(0, 425, gameWidth, 400);
-		addGround(700, 325, 100, 100);
+		new Ground(0, -25, gameWidth, 350, this);
+		new Ground(0, 425, gameWidth, 400, this);
+		new Ground(700, 325, 100, 100, this);
 		Switch switch1 = new Switch("switch1", 100, 600, this);
-		physicsManager.addTrigger(switch1);
 		switch1.addEventListener(this, Events.SWITCH);
 		Switch switch2 = new Switch("switch2", 600, 700, this);
-		physicsManager.addTrigger(switch2);
 		switch2.addEventListener(this, Events.SWITCH);		
 		
 		// boundaries 
-		addWall(gameWidth/2-20, 0, 20, gameHeight);
-		addWall(0, 0, 20, gameHeight);
-		addWall(gameWidth-20, 0, 20, gameHeight);
-		addWall(0, 0, gameWidth, 20);
-		addWall(0, gameHeight-20, gameWidth, 20);
-//		addWall(gameWidth/2, gameHeight/2, 20, gameHeight);
-//		addWall(0, gameHeight/2, 20, gameHeight);
-//		addWall(gameWidth-5, gameHeight/2, 20, gameHeight);
-//		addWall(gameWidth/2, 0, gameWidth, 20);
-//		addWall(gameWidth/2, gameHeight-35, gameWidth, 20);
+		new Wall(gameWidth/2-10, 0, 20, gameHeight, this);
+		new Wall(0, 0, 20, gameHeight, this);
+		new Wall(gameWidth-20, 0, 20, gameHeight, this);
+		new Wall(0, 0, gameWidth, 20, this);
+		new Wall(0, gameHeight-20, gameWidth, 20, this);
 
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);
@@ -49,33 +41,17 @@ public class Level1 extends Level implements IEventListener {
 		player1.setzOrder(1);
 		player2.setzOrder(1);
 
-		physicsManager.addObject(player1);
-		physicsManager.addObject(player2); 
-		
 		// doors
 		Door door1 = new Door(200, 100, this);
-		physicsManager.addTrigger(door1);
 		door1.addEventListener(this, Events.DOOR);
 		Door door2 = new Door(800, 100, this);
-		physicsManager.addTrigger(door2);
 		door2.addEventListener(this, Events.DOOR);
 		
-//		Doors door1 = new Doors("door1", 50, 80, this);
-//		door1.setScaleX(0.5);
-//		door1.setScaleY(0.5);
-//		physicsManager.addObject(door1);
-//		door1.addEventListener(this, WinEvent.EVENT_TYPE);
-//		Doors door2 = new Doors("door2", gameWidth-50, 80, this);
-//		door2.setScaleX(0.5);
-//		door2.setScaleY(0.5);
-//		physicsManager.addObject(door2);
-//		door2.addEventListener(this, WinEvent.EVENT_TYPE);
-		
 		// enemies
-		Enemy enemy1 = addEnemy("enemy1", "ghost.png", EnemyType.homing, player2);
+		Enemy enemy1 = new Enemy("enemy1", "ghost.png", EnemyType.homing, this, player2);
 		enemy1.setPosition(500,500);
 
-		Enemy enemy2 = addEnemy("enemy2", "ghost.png", EnemyType.staticX, player1);
+		Enemy enemy2 = new Enemy("enemy2", "ghost.png", EnemyType.staticX, this, player1);
 		enemy2.setPosition(480,200);
 
 	}
@@ -87,34 +63,15 @@ public class Level1 extends Level implements IEventListener {
 //		particleMan.update();
 	}
 
-	private Wall addWall(double x, double y, double width, double height) {
-		Wall p = new Wall(x, y, width, height, this);
-		physicsManager.addObject(p);
-		return p;
-	}
-	
-	private Ground addGround(double x, double y, double width, double height) {
-		Ground g = new Ground(x, y, width, height, this);
-		physicsManager.addTrigger(g);
-		return g;
-	}
-	
-	private Enemy addEnemy(String id, String fileName, EnemyType type, Player player){
-		Enemy e = new Enemy(id, fileName, type, this, player);
-		physicsManager.addObject(e);
-		return e;
-	}
-	
 	@Override
 	public void handleEvent(Event event) {
 		if(event.getType().equals(Events.SWITCH)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
-				TrapDoor trap = new TrapDoor(900, 500, this);
-				physicsManager.addTrigger(trap);
+				new TrapDoor(900, 500, this);
 			}
 			else if (obj.getId().equals("switch2")) {
-				addGround(200, 325, 100, 100);
+				new Ground(200, 325, 100, 100, this);
 			}
 		}
 		if(event.getType().equals(Events.DEATH)) {

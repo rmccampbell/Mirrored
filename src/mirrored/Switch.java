@@ -13,6 +13,7 @@ public class Switch extends Sprite {
 		super(id, "lever_off.png");
 		parent.addChild(this);
 		setPosition(x, y);
+		Main.getInstance().getPhysicsManager().addTrigger(this);
 	}
 	
 	private void activate() {

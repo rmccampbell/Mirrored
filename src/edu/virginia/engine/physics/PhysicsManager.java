@@ -18,6 +18,11 @@ public class PhysicsManager {
 	private ArrayList<PhysicsObject> objects = new ArrayList<>();
 	private ArrayList<DisplayObject> triggers = new ArrayList<>();
 
+	public void clear() {
+		objects.clear();
+		triggers.clear();
+	}
+	
 	public void update() {
 		for (Iterator<PhysicsObject> iterator = objects.iterator(); iterator.hasNext();) {
 			PhysicsObject object = iterator.next();

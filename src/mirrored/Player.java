@@ -27,6 +27,7 @@ public class Player extends Character {
 		addAnimation("walk", 0, 2);
 		setAnimation("stand");
 		addPhysics(1, 0);
+		Main.getInstance().getPhysicsManager().addObject(this);
 		setHealth(100);
 	}
 
@@ -34,12 +35,12 @@ public class Player extends Character {
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-			setFlipped(!isRight);
-			move(isRight ? SPEED : -SPEED, 0);
-		}
-		if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
 			setFlipped(isRight);
 			move(isRight ? -SPEED : SPEED, 0);
+		}
+		if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+			setFlipped(!isRight);
+			move(isRight ? SPEED : -SPEED, 0);
 		}
 		if (pressedKeys.contains(KeyEvent.VK_UP)) {
 			move(0, -SPEED);

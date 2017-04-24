@@ -9,5 +9,6 @@ public class Wall extends TexturedSprite {
 		super("platform", "wall_tiles.png", x, y, width, height);
 		parent.addChild(this);
 		addPhysics(PhysicsObject.STATIC, 0);
+		Main.getInstance().getPhysicsManager().addObject(this);
 	}
 }

@@ -13,6 +13,7 @@ public class Door extends AnimatedSprite {
 		addAnimation("door1", 0, 1);
 		setAnimation("door1");
 		setPosition(x, y);
+		Main.getInstance().getPhysicsManager().addTrigger(this);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public class TrapDoor extends Sprite{
 		parent.addChild(this);
 		setPosition(x, y);
 		setBBox(0,0, 40, 20);
+		Main.getInstance().getPhysicsManager().addTrigger(this);
 	}
 
 	@Override
