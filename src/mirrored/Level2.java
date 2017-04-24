@@ -9,13 +9,18 @@ import edu.virginia.engine.physics.PhysicsManager;
 
 public class Level2 extends Level implements IEventListener {
 
+	Ground bridge;
+	
 	public Level2() {
 		super("Level 2");
 		physicsManager = Main.getInstance().getPhysicsManager();
 		physicsManager.clear();
 		
 		// level 2
-		new Ground(0, 0, gameWidth, gameHeight, this);
+		//new Ground(0, 0, gameWidth, gameHeight, this);
+		new Ground(0, -25, gameWidth, 350, this);
+		new Ground(0, 425, gameWidth, 400, this);
+		new Ground(700, 325, 100, 100, this);
 		
 		// boundaries 
 		new Wall(gameWidth/2-10, 0, 20, gameHeight, this);
@@ -25,7 +30,7 @@ public class Level2 extends Level implements IEventListener {
 		new Wall(0, gameHeight-20, gameWidth, 20, this);
 
 		// buttons
-		Button button1 = new Button("button1", 200, 300, this);
+		Button button1 = new Button("button1", 200, 500, this);
 		button1.addEventListener(this, Events.BUTTON_ON);
 		button1.addEventListener(this, Events.BUTTON_OFF);
 		
@@ -88,6 +93,16 @@ public class Level2 extends Level implements IEventListener {
 //			win.setPosition(500, 400);
 //			win.setzOrder(1);
 //			this.addChildConcurrent(win);
+		}
+		if(event.getType().equals(Events.BUTTON_ON)){
+			DisplayObject obj = ((DisplayObject)event.getSource());
+			if (obj.getId().equals("button1")) {
+				bridge = new Ground(200, 325, 100, 100, this);
+			}
+		}
+		if(event.getType().equals(Events.BUTTON_OFF)){
+			DisplayObject obj = ((DisplayObject)event.getSource());
+			bridge.destroy();
 		}
 	}
 }
