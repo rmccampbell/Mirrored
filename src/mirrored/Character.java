@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.physics.Direction;
+import edu.virginia.engine.physics.PhysicsObject;
 
 public class Character extends AnimatedSprite {
 	
@@ -13,6 +14,7 @@ public class Character extends AnimatedSprite {
 	protected int health;
 	protected Direction facing = Direction.DOWN;
 	protected boolean walking = false;
+	protected double attackRadius;
 
 	public Character(String id) {
 		super(id);
@@ -69,7 +71,15 @@ public class Character extends AnimatedSprite {
 		return health;
 	}
 
-	protected Rectangle2D getAttackBox(double attackRadius){
+	public double getAttackRadius() {
+		return attackRadius;
+	}
+
+	public void setAttackRadius(double attackRadius) {
+		this.attackRadius = attackRadius;
+	}
+
+	protected Rectangle2D getAttackBox(){
 		Rectangle2D attack = new Rectangle2D.Double();
 
 		switch (facing){
@@ -88,6 +98,17 @@ public class Character extends AnimatedSprite {
 		}
 
 		return attack;
+	}
+
+	public void attack(){
+		ArrayList<PhysicsObject> collided = Main.getInstance().getPhysicsManager().getCollisions(this.getAttackBox());
+
+		for (PhysicsObject c : collided) {
+			if(c.getSprite() instanceof Character){
+				Character character = (Character) c.getSprite();
+				character.die();
+			}
+		}
 	}
 
 }
