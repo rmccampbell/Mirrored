@@ -18,14 +18,25 @@ public class Player extends Character {
 	private Player otherPlayer;
 
 	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
-		super("player" + (isRight ? "2" : "1"), "mario_run.png", 1, 2);
+		super("player" + (isRight ? "2" : "1"), "characterSheet.png", 4, 4);
 		parent.addChild(this);
 		this.isRight = isRight;
 		setPosition(x, y);
-		setFlipped(isRight);
-		addAnimation("stand", 0, 1);
-		addAnimation("walk", 0, 2);
-		setAnimation("stand");
+		
+		// animation
+		setScaleX(0.1);
+		setScaleY(0.1);
+		setFrameDuration(10);
+		addAnimation("standUp", 4, 1);
+		addAnimation("standDown", 0, 1);
+		addAnimation("standLeft", 8, 1);
+		addAnimation("standRight", 13, 1);
+		addAnimation("walkDown", 0, 4);
+		addAnimation("walkUp", 4, 4);
+		addAnimation("walkLeft", 8, 4);
+		addAnimation("walkRight", 12, 4);
+		setAnimation("standDown");
+		
 		addPhysics(1, 0);
 		Main.getInstance().getPhysicsManager().addObject(this);
 		setHealth(100);
@@ -33,24 +44,31 @@ public class Player extends Character {
 
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
-		super.update(pressedKeys);
+		this.walking = false;
 		if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-			setFlipped(isRight);
 			move(isRight ? -SPEED : SPEED, 0);
+			this.facing = (isRight ? Direction.LEFT : Direction.RIGHT);
+			this.walking = true;
 		}
 		if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-			setFlipped(!isRight);
 			move(isRight ? SPEED : -SPEED, 0);
+			this.facing = (isRight? Direction.RIGHT : Direction.LEFT);
+			this.walking = true;
 		}
 		if (pressedKeys.contains(KeyEvent.VK_UP)) {
 			move(0, -SPEED);
+			this.facing = Direction.UP;
+			this.walking = true;			
 		}
 		if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
 			move(0, SPEED);
+			this.facing = Direction.DOWN;
+			this.walking = true;
 		}
 		if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
 			isSynced = !isSynced;
 		}
+		super.update(pressedKeys);
 	}
 	
 	public void setOtherPlayer(Player otherPlayer) {
