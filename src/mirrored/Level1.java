@@ -17,6 +17,8 @@ public class Level1 extends Level implements IEventListener {
 		new Ground(0, -25, gameWidth, 350, this);
 		new Ground(0, 425, gameWidth, 400, this);
 		new Ground(700, 325, 100, 100, this);
+		
+		// switches
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		switch1.addEventListener(this, Events.SWITCH);
 		Switch switch2 = new Switch("switch2", 600, 700, this);
@@ -48,10 +50,10 @@ public class Level1 extends Level implements IEventListener {
 		door2.addEventListener(this, Events.DOOR);
 		
 		// enemies
-		Enemy enemy1 = new Enemy("enemy1", "ghost.png", EnemyType.homing, this, player2);
+		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, this, player2);
 		enemy1.setPosition(500,500);
 
-		Enemy enemy2 = new Enemy("enemy2", "ghost.png", EnemyType.staticX, this, player1);
+		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticX, this, player1);
 		enemy2.setPosition(480,200);
 
 	}
