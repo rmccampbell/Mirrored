@@ -18,7 +18,8 @@ public class Main extends Game {
 	private static Main instance;
 
 	public Main() {
-		super("Prototype", gameWidth, gameHeight);
+		// Added window border padding
+		super("Prototype", gameWidth + 6, gameHeight + 29);
 		instance = this;
 
 		levels = Arrays.asList(Level1.class, Level1.class);
@@ -52,6 +53,10 @@ public class Main extends Game {
 	
 	public void resetLevel() {
 		setLevel(level.getClass());
+	}
+	
+	public PhysicsManager getPhysicsManager() {
+		return physicsMan;
 	}
 	
 	public static Main getInstance() {

@@ -47,6 +47,9 @@ public class PhysicsManager {
 	}
 
 	private static void handleCollision(PhysicsObject object1, PhysicsObject object2) {
+		if (object1.isStatic() && object2.isStatic()) {
+			return; // ignore collisions on static objects
+		}
 		Point2D disp = resolveCollision(object1, object2);
 		if (fullCollisions) {
 			if (object1.isStatic()) {
