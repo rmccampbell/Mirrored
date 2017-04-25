@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.physics.PhysicsManager;
+import edu.virginia.engine.sound.SoundManager;
 
 public class Main extends Game {
 	
@@ -14,6 +15,7 @@ public class Main extends Game {
 	private PhysicsManager physicsMan = new PhysicsManager();
 	private List<Class<? extends Level>> levels;
 	private Level level;
+	static SoundManager mySoundManager = new SoundManager();
 
 	private static Main instance;
 
@@ -70,5 +72,7 @@ public class Main extends Game {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.start();
+		mySoundManager.loadSound("BGmusic", "gameMusic.wav");
+		mySoundManager.playSound("BGmusic", true);
 	}
 }
