@@ -17,17 +17,21 @@ public class Level1 extends Level implements IEventListener {
 		new Ground(0, -25, gameWidth, 350, this);
 		new Ground(0, 425, gameWidth, 400, this);
 		new Ground(700, 325, 100, 100, this);
+		
+		// switches
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		switch1.addEventListener(this, Events.SWITCH);
+		switch1.setScale(0.7);
 		Switch switch2 = new Switch("switch2", 600, 700, this);
 		switch2.addEventListener(this, Events.SWITCH);		
+		switch2.setScale(0.7);
 		
 		// boundaries 
 		new Wall(gameWidth/2-10, 0, 20, gameHeight, this);
 		new Wall(0, 0, 20, gameHeight, this);
 		new Wall(gameWidth-20, 0, 20, gameHeight, this);
 		new Wall(0, 0, gameWidth, 20, this);
-		new Wall(0, gameHeight-20, gameWidth, 20, this);
+		new Wall(0, gameHeight-40, gameWidth, 20, this);
 
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);
@@ -48,10 +52,10 @@ public class Level1 extends Level implements IEventListener {
 		door2.addEventListener(this, Events.DOOR);
 		
 		// enemies
-		Enemy enemy1 = new Enemy("enemy1", "ghost.png", EnemyType.homing, this, player2);
+		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, this, player2);
 		enemy1.setPosition(500,500);
 
-		Enemy enemy2 = new Enemy("enemy2", "ghost.png", EnemyType.staticX, this, player1);
+		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticX, this, player1);
 		enemy2.setPosition(480,200);
 
 	}

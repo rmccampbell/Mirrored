@@ -19,10 +19,16 @@ public class Enemy extends Character {
 	}
 	
 	public Enemy(String id, String fileName, EnemyType type, DisplayObjectContainer parent, Player target) {
-		super(id, fileName, 1, 1);
+		super(id, fileName, 3, 4);
 		parent.addChild(this);
-		addAnimation("stand", 0, 1);
+		
+		// animation
+		setScaleX(0.3);
+		setScaleY(0.3);
+		addAnimation("stand", 0, 12);
 		setAnimation("stand");
+		this.walking = true;
+		
 		physics = addPhysics();
 		Main.getInstance().getPhysicsManager().addObject(this);
 		this.type = type;
@@ -37,7 +43,13 @@ public class Enemy extends Character {
 		case homing:
 			physics.setVelocity(0, 0);
 			break;
+		case radiusHoming:
+			physics.setVelocity(0,0);
+			break;
 		}
+		
+		this.setBBox(0, 0, this.getWidth()-5, this.getHeight()-15);
+		
 	}
 	
 	public void setTarget(Player p){
@@ -51,10 +63,15 @@ public class Enemy extends Character {
 	
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
-		super.update(pressedKeys);		
+		super.update(pressedKeys);
 		switch (type) {
 		case homing:
 			moveTowards();
+		case radiusHoming:
+			double radius = Math.sqrt((target.getX()-this.getX())*(target.getX()-this.getX()) + (target.getY()-this.getY())*(target.getY()-this.getY()));
+			if(radius < 200){
+				moveTowards();
+			}
 		}
 	}
 

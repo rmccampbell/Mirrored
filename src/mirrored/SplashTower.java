@@ -21,11 +21,13 @@ public class SplashTower extends Character {
         super.update(pressedKeys);
     }
 
+
     //call this when the tower is triggered and pass the result to the getcollision method in physicsmanager so
     //all the necessary characters can get killed
-    protected Rectangle2D getAttackBox(double attackRadius){
+    @Override
+    protected Rectangle2D getAttackBox() {
         Rectangle2D attack = new Rectangle2D.Double();
-        attack = new Rectangle2D.Double(this.getX(), this.getY(), 2*attackRadius, 2*attackRadius );
+        attack = new Rectangle2D.Double(this.getX(), this.getY(), 2 * attackRadius, 2 * attackRadius);
         return attack;
     }
 
