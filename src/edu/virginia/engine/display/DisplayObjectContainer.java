@@ -28,11 +28,11 @@ public class DisplayObjectContainer extends DisplayObject {
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		for (Iterator<DisplayObject> iterator = children.iterator(); iterator.hasNext();) {
-			DisplayObject child = iterator.next();
+		for (int i = 0; i < children.size(); i++) {
+			DisplayObject child = children.get(i);
 			child.update(pressedKeys);
 			if (!child.isAlive())
-				iterator.remove();
+				children.remove(i--);
 		}
 		children.addAll(newChildren);
 		newChildren.clear();

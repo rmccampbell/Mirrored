@@ -104,7 +104,7 @@ public class Character extends AnimatedSprite {
 		ArrayList<PhysicsObject> collided = Main.getInstance().getPhysicsManager().getCollisions(this.getAttackBox());
 
 		for (PhysicsObject c : collided) {
-			if(c.getSprite() instanceof Character){
+			if(c.getSprite() instanceof Character && c.getSprite() != this){
 				Character character = (Character) c.getSprite();
 				character.die();
 			}

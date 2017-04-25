@@ -11,7 +11,7 @@ import edu.virginia.engine.physics.Direction;
 
 public class Player extends Character {
 
-	private static double SPEED = 4;
+	private static double SPEED = 3;
 
 	private boolean isSynced = true;
 	private boolean isRight;
@@ -26,6 +26,7 @@ public class Player extends Character {
 		// animation
 		setScaleX(0.1);
 		setScaleY(0.1);
+		//setBBox(0,0,20,40);
 		setFrameDuration(10);
 		addAnimation("standUp", 4, 1);
 		addAnimation("standDown", 0, 1);
