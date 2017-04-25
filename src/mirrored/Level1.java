@@ -21,15 +21,17 @@ public class Level1 extends Level implements IEventListener {
 		// switches
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		switch1.addEventListener(this, Events.SWITCH);
+		switch1.setScale(0.7);
 		Switch switch2 = new Switch("switch2", 600, 700, this);
 		switch2.addEventListener(this, Events.SWITCH);		
+		switch2.setScale(0.7);
 		
 		// boundaries 
 		new Wall(gameWidth/2-10, 0, 20, gameHeight, this);
 		new Wall(0, 0, 20, gameHeight, this);
 		new Wall(gameWidth-20, 0, 20, gameHeight, this);
 		new Wall(0, 0, gameWidth, 20, this);
-		new Wall(0, gameHeight-20, gameWidth, 20, this);
+		new Wall(0, gameHeight-40, gameWidth, 20, this);
 
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);
