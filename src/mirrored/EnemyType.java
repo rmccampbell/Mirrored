@@ -1,5 +1,5 @@
 package mirrored;
 
 public enum EnemyType {
-	staticX, staticY, homing
+	staticX, staticY, homing, radiusHoming
 }
