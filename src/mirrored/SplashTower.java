@@ -1,5 +1,10 @@
 package mirrored;
 
+import edu.virginia.engine.display.DisplayObjectContainer;
+import edu.virginia.engine.events.Event;
+import edu.virginia.engine.physics.PhysicsObject;
+
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -8,17 +13,31 @@ import java.util.ArrayList;
  */
 public class SplashTower extends Character {
 
-    public SplashTower(String id) {
-        super(id);
-    }
 
-    public SplashTower(String id, String fileName, int rows, int cols) {
-        super(id, fileName, rows, cols);
+    public SplashTower(String id, double x, double y, DisplayObjectContainer parent) {
+        super(id, "splash_tower.png", 1 , 1);
+        parent.addChild(this);
+        setPosition(x, y);
+        setAttackRadius(60);
+
+        addAnimation("tower", 0, 1);
+        setAnimation("tower");
+
+        addPhysics(PhysicsObject.STATIC, 0);
+        Main.getInstance().getPhysicsManager().addObject(this);
     }
 
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
+    }
+
+    @Override
+    public void draw(Graphics g){
+        super.draw(g);
+        Rectangle2D rect = getAttackBox();
+        g.drawRect((int)rect.getX(), (int)rect.getY(), (int)rect.getHeight(), (int)rect.getWidth());
+
     }
 
 
@@ -27,8 +46,13 @@ public class SplashTower extends Character {
     @Override
     protected Rectangle2D getAttackBox() {
         Rectangle2D attack = new Rectangle2D.Double();
-        attack = new Rectangle2D.Double(this.getX(), this.getY(), 2 * attackRadius, 2 * attackRadius);
+        attack = new Rectangle2D.Double(this.getX()-attackRadius, this.getY()-attackRadius, 2 * attackRadius, 2 * attackRadius);
         return attack;
     }
+
+//    @Override
+//    public void die() {
+//        throw new RuntimeException();
+//    }
 
 }
