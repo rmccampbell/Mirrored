@@ -14,7 +14,7 @@ public class Character extends AnimatedSprite {
 	protected int health;
 	protected Direction facing = Direction.DOWN;
 	protected boolean walking = false;
-	protected double attackRadius;
+	protected double attackRadius = 20;
 
 	public Character(String id) {
 		super(id);
