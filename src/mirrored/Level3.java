@@ -111,7 +111,7 @@ public class Level3 extends Level implements IEventListener {
             }
 
             if(obj.getId().equals("button2")){
-                tower1.attack();
+                //tower1.attack();
                 tower2.attack();
 //                new Arrow(100, gameHeight-300, 0, -4, this);
 //                new Arrow(400, gameHeight-300, 0, -4, this);
@@ -122,7 +122,7 @@ public class Level3 extends Level implements IEventListener {
             Main.getInstance().resetLevel();
         }
         if (event.getType().equals(Events.DOOR)) {
-            Main.getInstance().nextLevel();
+            //Main.getInstance().nextLevel();
         }
     }
 }

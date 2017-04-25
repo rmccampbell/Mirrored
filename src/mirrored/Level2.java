@@ -42,9 +42,9 @@ public class Level2 extends Level implements IEventListener {
 		door2.addEventListener(this, Events.DOOR);
 		
 		// buttons
-		Button button1 = new Button("button1", 60, 250, this);
-		button1.addEventListener(this, Events.BUTTON_ON);
-		button1.addEventListener(this, Events.BUTTON_OFF);
+//		Button button1 = new Button("button1", 60, 250, this);
+//		button1.addEventListener(this, Events.BUTTON_ON);
+//		button1.addEventListener(this, Events.BUTTON_OFF);
 		
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 720, this);
