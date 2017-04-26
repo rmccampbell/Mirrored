@@ -13,8 +13,7 @@ public class Level2 extends Level implements IEventListener {
 	
 	public Level2() {
 		super("Level 2");
-		physicsManager = Main.getInstance().getPhysicsManager();
-		physicsManager.clear();
+		physicsManager = new PhysicsManager();
 		
 		new Ground(0, 0, gameWidth, gameHeight, this);
 		
@@ -39,7 +38,7 @@ public class Level2 extends Level implements IEventListener {
 		Door door1 = new Door(400, 100, this);
 		door1.addEventListener(this, Events.DOOR);
 		Door door2 = new Door(600, 100, this);
-		door2.addEventListener(this, Events.DOOR);
+//		door2.addEventListener(this, Events.DOOR);
 		
 		// buttons
 //		Button button1 = new Button("button1", 60, 250, this);
@@ -55,18 +54,15 @@ public class Level2 extends Level implements IEventListener {
 		player1.addEventListener(this, Events.DEATH);
 		player2.addEventListener(this, Events.DEATH);
 
-		player1.setzOrder(1);
-		player2.setzOrder(1);
-		
 		// left side enemies
-		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, this, player1);
+		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, player1, this);
 		enemy1.setPosition(480,400);
-		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticY, this, player1);
+		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticY, player1, this);
 		enemy2.setPosition(60, 500);
 		// right side enemies
-		Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticX, this, player2);
+		Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticX, player2, this);
 		enemy3.setPosition(500,500);
-		Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.staticX, this, player2);
+		Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.staticX, player2, this);
 		enemy4.setPosition(800,400);
 	
 	}
@@ -94,14 +90,14 @@ public class Level2 extends Level implements IEventListener {
 //			Sprite gameover = new Sprite("gameover", "gameover.png");
 //			gameover.setPosition(500, 400);
 //			gameover.setzOrder(1);
-//			this.addChildConcurrent(gameover);
+//			this.addChild(gameover);
 		}
 		if(event.getType().equals(Events.DOOR)) {
 			Main.getInstance().nextLevel();
 //			Sprite win = new Sprite("win", "win.png");
 //			win.setPosition(500, 400);
 //			win.setzOrder(1);
-//			this.addChildConcurrent(win);
+//			this.addChild(win);
 		}
 		if(event.getType().equals(Events.BUTTON_ON)){
 			

@@ -1,7 +1,6 @@
 package mirrored;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 
@@ -9,11 +8,12 @@ public class Switch extends Sprite {
 	
 	private boolean activated = false;
 
-	public Switch(String id, double x, double y, DisplayObjectContainer parent) {
+	public Switch(String id, double x, double y, Level level) {
 		super(id, "lever_off.png");
-		parent.addChild(this);
+		level.addChild(this);
 		setPosition(x, y);
-		Main.getInstance().getPhysicsManager().addTrigger(this);
+		setScale(0.7);
+		level.getPhysicsManager().addTrigger(this);
 	}
 	
 	private void activate() {

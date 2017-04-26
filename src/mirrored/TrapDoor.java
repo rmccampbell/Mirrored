@@ -1,17 +1,17 @@
 package mirrored;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
 
 public class TrapDoor extends Sprite{
 
-	public TrapDoor(double x, double y, DisplayObjectContainer parent) {
+	public TrapDoor(double x, double y, Level level) {
 		super("trapDoor", "hole.png");
-		parent.addChild(this);
+		level.addChild(this);
 		setPosition(x, y);
 		setBBox(0,0, 40, 20);
-		Main.getInstance().getPhysicsManager().addTrigger(this);
+		setzOrder(-1);
+		level.getPhysicsManager().addTrigger(this);
 	}
 
 	@Override

@@ -3,12 +3,11 @@ package edu.virginia.engine.display;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class DisplayObjectContainer extends DisplayObject {
 
 	private ArrayList<DisplayObject> children = new ArrayList<>();
-	private ArrayList<DisplayObject> newChildren = new ArrayList<>();
+//	private ArrayList<DisplayObject> newChildren = new ArrayList<>();
 
 	public DisplayObjectContainer(String id) {
 		super(id);
@@ -28,21 +27,20 @@ public class DisplayObjectContainer extends DisplayObject {
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		for (int i = 0; i < children.size(); i++) {
-			DisplayObject child = children.get(i);
+		for (DisplayObject child : new ArrayList<>(children)) {
 			child.update(pressedKeys);
 			if (!child.isAlive())
-				children.remove(i--);
+				children.remove(child);
 		}
-		children.addAll(newChildren);
-		newChildren.clear();
+//		children.addAll(newChildren);
+//		newChildren.clear();
 		children.sort(Comparator.comparingInt(DisplayObject::getzOrder));
 	}
 	
-	public void addChildConcurrent(DisplayObject child) {
-		newChildren.add(child);
-		child.setParent(this);
-	}
+//	public void addChildConcurrent(DisplayObject child) {
+//		newChildren.add(child);
+//		child.setParent(this);
+//	}
 	
 	public void addChild(DisplayObject child) {
 		children.add(child);

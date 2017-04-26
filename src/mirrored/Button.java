@@ -3,7 +3,6 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 
@@ -12,13 +11,13 @@ public class Button extends Sprite {
 	private boolean previouslyActivated = false;
 	private boolean activated = false;
 
-	public Button(String id, double x, double y, DisplayObjectContainer parent) {
+	public Button(String id, double x, double y, Level level) {
 		super(id, "button_off.png");
 		setScaleX(0.3);
 		setScaleY(0.3);
-		parent.addChild(this);
+		level.addChild(this);
 		setPosition(x, y);
-		Main.getInstance().getPhysicsManager().addTrigger(this);
+		level.getPhysicsManager().addTrigger(this);
 	}
 	
 	private void activate() {

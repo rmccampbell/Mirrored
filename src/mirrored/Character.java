@@ -15,13 +15,14 @@ public class Character extends AnimatedSprite {
 	protected Direction facing = Direction.DOWN;
 	protected boolean walking = false;
 	protected double attackRadius = 20;
+	protected Level level;
 
-	public Character(String id) {
-		super(id);
-	}
-
-	public Character(String id, String fileName, int rows, int cols) {
+	public Character(String id, String fileName, int rows, int cols, Level level) {
 		super(id, fileName, rows, cols);
+		this.level = level;
+		level.addChild(this);
+		this.addPhysics();
+		level.getPhysicsManager().addObject(this);
 	}
 	
 	@Override
@@ -101,7 +102,7 @@ public class Character extends AnimatedSprite {
 	}
 
 	public void attack(){
-		ArrayList<PhysicsObject> collided = Main.getInstance().getPhysicsManager().getCollisions(this.getAttackBox());
+		ArrayList<PhysicsObject> collided = level.getPhysicsManager().getCollisions(this.getAttackBox());
 
 		for (PhysicsObject c : collided) {
 			if(c.getSprite() instanceof Character && c.getSprite() != this){

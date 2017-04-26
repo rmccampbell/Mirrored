@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.physics.PhysicsManager;
 import edu.virginia.engine.sound.SoundManager;
 
 public class Main extends Game {
@@ -12,7 +11,7 @@ public class Main extends Game {
 	public static final int gameWidth = 1000;
 	public static final int gameHeight = 800;
 	
-	private PhysicsManager physicsMan = new PhysicsManager();
+//	private PhysicsManager physicsMan = new PhysicsManager();
 	private List<Class<? extends Level>> levels;
 	private Level level;
 	static SoundManager mySoundManager = new SoundManager();
@@ -54,6 +53,7 @@ public class Main extends Game {
 	
 	public void nextLevel() {
 		int ind = levels.indexOf(level.getClass());
+		System.out.println("next level: " + ind);
 		setLevel(ind + 1);
 	}
 	
@@ -61,9 +61,9 @@ public class Main extends Game {
 		setLevel(level.getClass());
 	}
 	
-	public PhysicsManager getPhysicsManager() {
-		return physicsMan;
-	}
+//	public PhysicsManager getPhysicsManager() {
+//		return level.getPhysicsManager();
+//	}
 	
 	public static Main getInstance() {
 		return instance;
@@ -72,7 +72,5 @@ public class Main extends Game {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.start();
-		mySoundManager.loadSound("BGmusic", "gameMusic.wav");
-		mySoundManager.playSound("BGmusic", true);
 	}
 }
