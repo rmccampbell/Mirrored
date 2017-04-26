@@ -3,6 +3,7 @@ package mirrored;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
+import edu.virginia.engine.display.Sprite;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class Level3 extends Level implements IEventListener {
     SplashTower tower1;
     SplashTower tower2;
+    Door door1, door2;
 
     public Level3() {
         super("Level 3");
@@ -76,9 +78,9 @@ public class Level3 extends Level implements IEventListener {
         enemy4.setPosition(550,400);
 
         // doors
-        Door door1 = new Door(400, 100, this);
+        door1 = new Door(400, 100, this);
         door1.addEventListener(this, Events.DOOR);
-        Door door2 = new Door(600, 100, this);
+        door2 = new Door(600, 100, this);
         door2.addEventListener(this, Events.DOOR);
 
         // enemies
@@ -107,7 +109,7 @@ public class Level3 extends Level implements IEventListener {
             DisplayObject obj = ((DisplayObject)event.getSource());
             if (obj.getId().equals("button1")) {
                 tower1.attack();
-                tower2.attack();
+//                tower2.attack();
             }
 
             if(obj.getId().equals("button2")){
@@ -121,8 +123,12 @@ public class Level3 extends Level implements IEventListener {
         if (event.getType().equals(Events.DEATH)) {
             Main.getInstance().resetLevel();
         }
-        if (event.getType().equals(Events.DOOR)) {
-            //Main.getInstance().nextLevel();
+        if (event.getType().equals(Events.DOOR) && (event.getSource()==door1 || event.getSource()==door2)) {
+ //           throw new RuntimeException("sdlkfj");
+            Sprite win = new Sprite("win", "win.png");
+			win.setPosition(500, 400);
+			win.setzOrder(1);
+			this.addChild(win);
         }
     }
 }

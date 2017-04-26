@@ -60,7 +60,7 @@ public class Level2 extends Level implements IEventListener {
 		
 		// left side enemies
 		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, this, player1);
-		enemy1.setPosition(480,200);
+		enemy1.setPosition(480,400);
 		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticY, this, player1);
 		enemy2.setPosition(60, 500);
 		// right side enemies
