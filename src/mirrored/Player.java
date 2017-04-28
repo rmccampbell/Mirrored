@@ -5,7 +5,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.physics.Direction;
 
@@ -17,16 +16,14 @@ public class Player extends Character {
 	private boolean isRight;
 	private Player otherPlayer;
 
-	public Player(boolean isRight, double x, double y, DisplayObjectContainer parent) {
-		super("player" + (isRight ? "2" : "1"), "characterSheet.png", 4, 4);
-		parent.addChild(this);
+	public Player(boolean isRight, double x, double y, Level level) {
+		super("player" + (isRight ? "2" : "1"), "characterSheet2.png", 4, 4, level);
 		this.isRight = isRight;
 		setPosition(x, y);
 		
 		// animation
-		setScaleX(0.1);
-		setScaleY(0.1);
-		//setBBox(0,0,20,40);
+		setScale(2.5);
+		setBBox(0, 0, 14, 18);
 		setFrameDuration(10);
 		addAnimation("standUp", 4, 1);
 		addAnimation("standDown", 0, 1);
@@ -38,8 +35,6 @@ public class Player extends Character {
 		addAnimation("walkRight", 12, 4);
 		setAnimation("standDown");
 		
-		addPhysics(1, 0);
-		Main.getInstance().getPhysicsManager().addObject(this);
 		setHealth(100);
 	}
 
@@ -66,9 +61,9 @@ public class Player extends Character {
 			this.facing = Direction.DOWN;
 			this.walking = true;
 		}
-		if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
-			isSynced = !isSynced;
-		}
+//		if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+//			isSynced = !isSynced;
+//		}
 		super.update(pressedKeys);
 	}
 	

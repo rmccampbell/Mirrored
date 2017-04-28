@@ -25,7 +25,8 @@ public class EventDispatcher implements IEventDispatcher {
 	@Override
 	public void dispatchEvent(Event event) {
 		if (eventListeners.containsKey(event.getType())) {
-			for (IEventListener listener : eventListeners.get(event.getType())) {
+			ArrayList<IEventListener> listeners = new ArrayList<>(eventListeners.get(event.getType()));
+			for (IEventListener listener : listeners) {
 				listener.handleEvent(event);
 			}
 		}

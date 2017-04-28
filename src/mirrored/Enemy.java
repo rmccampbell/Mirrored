@@ -3,7 +3,6 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.physics.Direction;
 import edu.virginia.engine.physics.PhysicsObject;
 
@@ -14,14 +13,8 @@ public class Enemy extends Character {
 	private PhysicsObject physics;
 	private double speed = 0.5;
 	
-	public Enemy(String id) {
-		super(id);
-	}
-	
-	public Enemy(String id, String fileName, EnemyType type, DisplayObjectContainer parent, Player target) {
-		super(id, fileName, 3, 4);
-		parent.addChild(this);
-		
+	public Enemy(String id, String fileName, EnemyType type, Player target, Level level) {
+		super(id, fileName, 3, 4, level);
 		// animation
 		setScaleX(0.3);
 		setScaleY(0.3);
@@ -29,10 +22,9 @@ public class Enemy extends Character {
 		setAnimation("stand");
 		this.walking = true;
 		
-		physics = addPhysics();
-		Main.getInstance().getPhysicsManager().addObject(this);
 		this.type = type;
 		this.target = target;
+		physics = getPhysics();
 		switch (type) {
 		case staticX:
 			physics.setVelocity(speed, 0);
@@ -67,11 +59,15 @@ public class Enemy extends Character {
 		switch (type) {
 		case homing:
 			moveTowards();
+			break;
 		case radiusHoming:
 			double radius = Math.sqrt((target.getX()-this.getX())*(target.getX()-this.getX()) + (target.getY()-this.getY())*(target.getY()-this.getY()));
-			if(radius < 200){
+			if (radius < 200) {
 				moveTowards();
 			}
+			break;
+		default:
+			break;
 		}
 	}
 

@@ -1,10 +1,6 @@
 package mirrored;
 
-import edu.virginia.engine.display.DisplayObjectContainer;
-import edu.virginia.engine.events.Event;
-import edu.virginia.engine.physics.PhysicsObject;
-
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -14,32 +10,36 @@ import java.util.ArrayList;
 public class SplashTower extends Character {
 
 
-    public SplashTower(String id, double x, double y, DisplayObjectContainer parent) {
-        super(id, "splash_tower.png", 1 , 1);
-        parent.addChild(this);
+    public SplashTower(String id, double x, double y, Level level) {
+        super(id, "splash_tower2.png", 1, 2, level);
         setPosition(x, y);
+        setBBox(0, 0, 50, 50);
         setAttackRadius(60);
 
-        addAnimation("tower", 0, 1);
-        setAnimation("tower");
+        addAnimation("inactive", 0, 1);
+        addAnimation("active", 1, 1);
+        setAnimation("inactive");
 
-        addPhysics(PhysicsObject.STATIC, 0);
-        Main.getInstance().getPhysicsManager().addObject(this);
+        getPhysics().setStatic(true);
     }
 
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
+        setAnimation("inactive");
     }
 
-    @Override
-    public void draw(Graphics g){
-        super.draw(g);
-        Rectangle2D rect = getAttackBox();
-        g.drawRect((int)rect.getX(), (int)rect.getY(), (int)rect.getHeight(), (int)rect.getWidth());
-
-    }
-
+//    @Override
+//    public void draw(Graphics g){
+//        super.draw(g);
+//        Rectangle2D rect = getAttackBox();
+//        g.drawRect((int)rect.getX(), (int)rect.getY(), (int)rect.getHeight(), (int)rect.getWidth());
+//    }
+    
+    public void activate() {
+    	attack();
+    	setAnimation("active");
+	}
 
     //call this when the tower is triggered and pass the result to the getcollision method in physicsmanager so
     //all the necessary characters can get killed

@@ -2,18 +2,19 @@ package mirrored;
 
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
-import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.events.Event;
 
 public class Door extends AnimatedSprite {
 
-	public Door(double x, double y, DisplayObjectContainer parent) {
+	public Door(double x, double y, Level level) {
 		super("door", "doors.png", 4, 3);
-		parent.addChild(this);
+		level.addChild(this);
+		setBBox(0, 0, 55, 60);
 		addAnimation("door1", 0, 1);
 		setAnimation("door1");
 		setPosition(x, y);
-		Main.getInstance().getPhysicsManager().addTrigger(this);
+		setzOrder(-1);
+		level.getPhysicsManager().addTrigger(this);
 	}
 
 	@Override

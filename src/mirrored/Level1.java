@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
+import edu.virginia.engine.physics.PhysicsManager;
 
 public class Level1 extends Level implements IEventListener {
 
 	public Level1() {
 		super("Level 1");
-		physicsManager = Main.getInstance().getPhysicsManager();
-		physicsManager.clear();
+		physicsManager = new PhysicsManager();
 		
 		// level 1
 		new Ground(0, -25, gameWidth, 350, this);
@@ -21,10 +21,8 @@ public class Level1 extends Level implements IEventListener {
 		// switches
 		Switch switch1 = new Switch("switch1", 100, 600, this);
 		switch1.addEventListener(this, Events.SWITCH);
-		switch1.setScale(0.7);
 		Switch switch2 = new Switch("switch2", 600, 700, this);
 		switch2.addEventListener(this, Events.SWITCH);		
-		switch2.setScale(0.7);
 		
 		// boundaries 
 		new Wall(gameWidth/2-10, 0, 20, gameHeight, this);
@@ -42,20 +40,17 @@ public class Level1 extends Level implements IEventListener {
 		player1.addEventListener(this, Events.DEATH);
 		player2.addEventListener(this, Events.DEATH);
 
-		player1.setzOrder(1);
-		player2.setzOrder(1);
-
 		// doors
 		Door door1 = new Door(200, 100, this);
 		door1.addEventListener(this, Events.DOOR);
 		Door door2 = new Door(800, 100, this);
-		door2.addEventListener(this, Events.DOOR);
+//		door2.addEventListener(this, Events.DOOR);
 		
 		// enemies
-		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, this, player2);
+		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, player2, this);
 		enemy1.setPosition(500,500);
 
-		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticX, this, player1);
+		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticX, player1, this);
 		enemy2.setPosition(480,200);
 
 	}
@@ -72,7 +67,7 @@ public class Level1 extends Level implements IEventListener {
 		if(event.getType().equals(Events.SWITCH)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
-				new TrapDoor(900, 500, this);
+				new TrapDoor(850, 500, this);
 			}
 			else if (obj.getId().equals("switch2")) {
 				new Ground(200, 325, 100, 100, this);
@@ -83,14 +78,14 @@ public class Level1 extends Level implements IEventListener {
 //			Sprite gameover = new Sprite("gameover", "gameover.png");
 //			gameover.setPosition(500, 400);
 //			gameover.setzOrder(1);
-//			this.addChildConcurrent(gameover);
+//			this.addChild(gameover);
 		}
 		if(event.getType().equals(Events.DOOR)) {
 			Main.getInstance().nextLevel();
 //			Sprite win = new Sprite("win", "win.png");
 //			win.setPosition(500, 400);
 //			win.setzOrder(1);
-//			this.addChildConcurrent(win);
+//			this.addChild(win);
 		}
 	}
 
