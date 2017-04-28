@@ -12,7 +12,7 @@ public class Level2 extends Level implements IEventListener {
 	Ground bridge;
 	
 	public Level2() {
-		super("Level 2");
+		super("Level 2", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
 		
 		new Ground(0, 0, gameWidth, gameHeight, this);

@@ -68,8 +68,14 @@ public class AnimatedSprite extends Sprite {
 	}
 	
 	private void nextFrame() {
-		frameNum = (frameNum + 1) % (anim != null ? anim.length : 1);
+		frameNum = anim != null ? (frameNum + 1) % anim.length : 0;
+		if (frameNum == 0)
+			animationDone();
 		updateImage();
+	}
+	
+	protected void animationDone() {
+		// override to do something when animation finishes
 	}
 	
 	private BufferedImage getFrame() {

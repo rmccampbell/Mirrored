@@ -18,9 +18,11 @@ public class Enemy extends Character {
 		// animation
 		setScaleX(0.3);
 		setScaleY(0.3);
-		addAnimation("stand", 0, 12);
-		setAnimation("stand");
-		this.walking = true;
+		addAnimation("standDown", 0, 12);
+		setAnimation("standDown");
+		setFrameDuration(4);
+		this.setBBox(0, 0, this.getWidth()-5, this.getHeight()-15);
+//		this.walking = true;
 		
 		this.type = type;
 		this.target = target;
@@ -39,8 +41,6 @@ public class Enemy extends Character {
 			physics.setVelocity(0,0);
 			break;
 		}
-		
-		this.setBBox(0, 0, this.getWidth()-5, this.getHeight()-15);
 		
 	}
 	
