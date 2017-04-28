@@ -10,7 +10,7 @@ import edu.virginia.engine.physics.PhysicsManager;
 public class Level1 extends Level implements IEventListener {
 
 	public Level1() {
-		super("Level 1");
+		super("Level 1", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
 		
 		// level 1
@@ -29,7 +29,7 @@ public class Level1 extends Level implements IEventListener {
 		new Wall(0, 0, 20, gameHeight, this);
 		new Wall(gameWidth-20, 0, 20, gameHeight, this);
 		new Wall(0, 0, gameWidth, 20, this);
-		new Wall(0, gameHeight-40, gameWidth, 20, this);
+		new Wall(0, gameHeight-20, gameWidth, 20, this);
 
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 700, this);

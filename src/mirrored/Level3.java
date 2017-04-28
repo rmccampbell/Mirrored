@@ -18,7 +18,7 @@ public class Level3 extends Level implements IEventListener {
 	private boolean winScreenShown;
 
 	public Level3() {
-		super("Level 3");
+		super("Level 3", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
 
 		// level 3

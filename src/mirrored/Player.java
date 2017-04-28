@@ -22,7 +22,7 @@ public class Player extends Character {
 		setPosition(x, y);
 		
 		// animation
-		setScale(2.5);
+		setScale(3);
 		setBBox(0, 0, 14, 18);
 		setFrameDuration(10);
 		addAnimation("standUp", 4, 1);
