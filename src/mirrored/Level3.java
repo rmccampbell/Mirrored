@@ -125,10 +125,10 @@ public class Level3 extends Level implements IEventListener {
         }
         if (event.getType().equals(Events.DOOR) && (event.getSource()==door1 || event.getSource()==door2)) {
  //           throw new RuntimeException("sdlkfj");
-            Sprite win = new Sprite("win", "win.png");
-			win.setPosition(500, 400);
-			win.setzOrder(1);
-			this.addChild(win);
+//            Sprite win = new Sprite("win", "win.png");
+//			win.setPosition(500, 400);
+//			win.setzOrder(1);
+//			this.addChild(win);
         }
     }
 }
