@@ -19,9 +19,9 @@ public class Level1 extends Level implements IEventListener {
 		new Ground(700, 325, 100, 100, this);
 		
 		// switches
-		Switch switch1 = new Switch("switch1", 100, 600, this);
+		Switch switch1 = new Switch("switch1", 100, 550, this);
 		switch1.addEventListener(this, Events.SWITCH);
-		Switch switch2 = new Switch("switch2", 600, 700, this);
+		Switch switch2 = new Switch("switch2", 800, 650, this);
 		switch2.addEventListener(this, Events.SWITCH);		
 		
 		// boundaries 
@@ -51,7 +51,9 @@ public class Level1 extends Level implements IEventListener {
 		enemy1.setPosition(500,500);
 
 		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticX, player1, this);
-		enemy2.setPosition(480,200);
+		enemy2.setPosition(480,175);
+		Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticX, player1, this);
+		enemy3.setPosition(20,220);
 
 	}
 	
@@ -67,7 +69,7 @@ public class Level1 extends Level implements IEventListener {
 		if(event.getType().equals(Events.SWITCH)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
-				new TrapDoor(850, 500, this);
+				new TrapDoor(750, 520, this);
 			}
 			else if (obj.getId().equals("switch2")) {
 				new Ground(200, 325, 100, 100, this);

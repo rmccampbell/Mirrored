@@ -68,7 +68,7 @@ public class Level3 extends Level implements IEventListener {
 		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticX, player1, this);
 		enemy2.setPosition(480, 300);
 		Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticX, player1, this);
-		enemy3.setPosition(20, 300);
+		enemy3.setPosition(230, 300);
 		Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.homing, player2, this);
 		enemy4.setPosition(550, 400);
 
@@ -97,7 +97,7 @@ public class Level3 extends Level implements IEventListener {
 	@Override
 	public void handleEvent(Event event) {
 		if (event.getType().equals(Events.SWITCH)) {
-			new Ground(670, 250, 150, 100, this);
+			new Ground(650, 250, 200, 100, this);
 		}
 
 		if (event.getType().equals(Events.BUTTON_HOLD)) {
