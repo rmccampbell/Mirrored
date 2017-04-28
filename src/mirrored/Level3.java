@@ -15,6 +15,7 @@ public class Level3 extends Level implements IEventListener {
 	SplashTower tower1;
 	SplashTower tower2;
 	Door door1, door2;
+	private boolean winScreenShown;
 
 	public Level3() {
 		super("Level 3");
@@ -48,11 +49,9 @@ public class Level3 extends Level implements IEventListener {
 
 		// buttons
 		Button button1 = new Button("button1", 550, 700, this);
-		button1.addEventListener(this, Events.BUTTON_ON);
-		button1.addEventListener(this, Events.BUTTON_OFF);
+		button1.addEventListener(this, Events.BUTTON_HOLD);
 		Button button2 = new Button("button2", 950, 700, this);
-		button2.addEventListener(this, Events.BUTTON_ON);
-		button2.addEventListener(this, Events.BUTTON_OFF);
+		button2.addEventListener(this, Events.BUTTON_HOLD);
 
 		// players
 		Player player1 = new Player(false, 250, 700, this);
@@ -101,7 +100,7 @@ public class Level3 extends Level implements IEventListener {
 			new Ground(670, 250, 150, 100, this);
 		}
 
-		if (event.getType().equals(Events.BUTTON_ON)) {
+		if (event.getType().equals(Events.BUTTON_HOLD)) {
 			DisplayObject obj = ((DisplayObject) event.getSource());
 			if (obj.getId().equals("button1")) {
 				tower1.activate();
@@ -119,7 +118,8 @@ public class Level3 extends Level implements IEventListener {
 		if (event.getType().equals(Events.DEATH)) {
 			Main.getInstance().resetLevel();
 		}
-		if (event.getType().equals(Events.DOOR)) {
+		if (event.getType().equals(Events.DOOR) && !winScreenShown) {
+			winScreenShown = true;
 			Sprite win = new Sprite("win", "win.png");
 			win.setPosition(500, 400);
 			win.setzOrder(1);

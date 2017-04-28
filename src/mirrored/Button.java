@@ -8,7 +8,7 @@ import edu.virginia.engine.events.Event;
 
 public class Button extends Sprite {
 	
-	private boolean previouslyActivated = false;
+	private boolean prevActivated = false;
 	private boolean activated = false;
 
 	public Button(String id, double x, double y, Level level) {
@@ -24,25 +24,35 @@ public class Button extends Sprite {
 		activated = true;
 		setImage("button_on.png");
 		dispatchEvent(new Event(Events.BUTTON_ON, this));
+		System.out.println("activated");
 	}
 	
 	private void deactivate() {
 		activated = false;
 		setImage("button_off.png");
 		dispatchEvent(new Event(Events.BUTTON_OFF, this));
+		System.out.println("deactivated");
+	}
+	
+	private void holdActive() {
+		dispatchEvent(new Event(Events.BUTTON_HOLD, this));
 	}
 	
 	@Override
 	public void trigger(DisplayObject other) {
 		super.trigger(other);
-		if (!activated && other instanceof Player){
-			activate();
+		if (other instanceof Player){
+			activated = true;
 		}		
 	}
 	
 	@Override
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
-		if(activated && !previouslyActivated ) deactivate();
+		if (activated && !prevActivated ) activate();
+		else if (!activated && prevActivated) deactivate();
+		if (activated) holdActive();
+		prevActivated = activated;
+		activated = false;
 	}
 }

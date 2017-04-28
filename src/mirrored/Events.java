@@ -6,4 +6,5 @@ public class Events {
 	public static final String DEATH = "death";
 	public static final String BUTTON_ON = "buttonOn";
 	public static final String BUTTON_OFF = "buttonOff";
+	public static final String BUTTON_HOLD = "buttonHold";
 }

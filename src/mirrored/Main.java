@@ -27,6 +27,9 @@ public class Main extends Game {
 		level = new Level1();
 		
 		addChild(level);
+
+		mySoundManager.loadSound("BGmusic", "gameMusic.wav");
+		mySoundManager.playSound("BGmusic", true);
 	}
 	
 	public Level getLevel() {
