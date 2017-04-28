@@ -24,7 +24,7 @@ import javax.swing.Timer;
 public class Game extends DisplayObjectContainer implements ActionListener, KeyListener, MouseListener {
 
 	/* Frames per second this game runs at */
-	private int FRAMES_PER_SEC = 60;
+	private int FRAMES_PER_SEC = 45;
 
 	/* The main JFrame that holds this game */
 	private JFrame mainFrame;

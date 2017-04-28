@@ -14,6 +14,7 @@ public class Arrow extends Sprite {
 		addPhysics();
 		getPhysics().setVelocity(vx, vy);
 		level.getPhysicsManager().addObject(this);
+		setBBox(0,0,10,10);
 	}
 	
 	@Override

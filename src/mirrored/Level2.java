@@ -64,6 +64,10 @@ public class Level2 extends Level implements IEventListener {
 		enemy3.setPosition(500,500);
 		Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.staticX, player2, this);
 		enemy4.setPosition(800,400);
+
+		//buttons
+		Button button1 = new Button("button1", 250, 700, this);
+		button1.addEventListener(this, Events.BUTTON_ON);
 	
 	}
 	
@@ -100,7 +104,7 @@ public class Level2 extends Level implements IEventListener {
 //			this.addChild(win);
 		}
 		if(event.getType().equals(Events.BUTTON_ON)){
-			
+			 new Arrow(480, gameHeight-300, -4, 0, this);
 		}
 		if(event.getType().equals(Events.BUTTON_OFF)){
 			

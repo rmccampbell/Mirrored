@@ -11,7 +11,7 @@ public class Enemy extends Character {
 	private EnemyType type;
 	private Player target;
 	private PhysicsObject physics;
-	private double speed = 0.5;
+	private double speed = 0.8;
 	
 	public Enemy(String id, String fileName, EnemyType type, Player target, Level level) {
 		super(id, fileName, 3, 4, level);
