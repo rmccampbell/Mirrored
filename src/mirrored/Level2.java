@@ -56,18 +56,19 @@ public class Level2 extends Level implements IEventListener {
 
 		// left side enemies
 		Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, player1, this);
-		enemy1.setPosition(480,400);
+		enemy1.setPosition(480,200);
 		Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticY, player1, this);
 		enemy2.setPosition(60, 500);
 		// right side enemies
 		Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticX, player2, this);
 		enemy3.setPosition(500,500);
 		Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.staticX, player2, this);
-		enemy4.setPosition(800,400);
+		enemy4.setPosition(800,420);
 
 		//buttons
-		Button button1 = new Button("button1", 250, 700, this);
+		Button button1 = new Button("button1", 250, 550, this);
 		button1.addEventListener(this, Events.BUTTON_ON);
+		button1.setzOrder(-1);
 	
 	}
 	
@@ -104,7 +105,7 @@ public class Level2 extends Level implements IEventListener {
 //			this.addChild(win);
 		}
 		if(event.getType().equals(Events.BUTTON_ON)){
-			 new Arrow(480, gameHeight-300, -4, 0, this);
+			 new Arrow(480, gameHeight-500, -4, 0, this);
 		}
 		if(event.getType().equals(Events.BUTTON_OFF)){
 			
