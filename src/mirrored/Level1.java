@@ -67,7 +67,7 @@ public class Level1 extends Level implements IEventListener {
 		if(event.getType().equals(Events.SWITCH)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("switch1")) {
-				new TrapDoor(850, 500, this);
+				new TrapDoor(750, 520, this);
 			}
 			else if (obj.getId().equals("switch2")) {
 				new Ground(200, 325, 100, 100, this);
