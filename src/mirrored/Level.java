@@ -13,6 +13,10 @@ public class Level extends DisplayObjectContainer {
 	public Level(String id) {
 		super(id);
 	}
+
+	public Level(String id, String fileName) {
+		super(id, fileName);
+	}
 	
 	public PhysicsManager getPhysicsManager() {
 		return physicsManager;
