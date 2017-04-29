@@ -12,6 +12,7 @@ public class Level extends DisplayObjectContainer {
 	
 	public Level(String id, String fileName) {
 		super(id, fileName);
+		setPivotPoint(0,0);
 	}
 
 	static final int gameWidth = Main.gameWidth;
