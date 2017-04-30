@@ -119,11 +119,7 @@ public class Level3 extends Level implements IEventListener {
 			Main.getInstance().resetLevel();
 		}
 		if (event.getType().equals(Events.DOOR) && !winScreenShown) {
-			winScreenShown = true;
-			Sprite win = new Sprite("win", "win.png");
-			win.setPosition(500, 400);
-			win.setzOrder(1);
-			this.addChild(win);
+			Main.getInstance().nextLevel();
 		}
 	}
 }

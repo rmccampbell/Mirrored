@@ -41,11 +41,28 @@ public class Enemy extends Character {
 			physics.setVelocity(0,0);
 			break;
 		}
-		
 	}
 	
 	public void setTarget(Player p){
 		target = p;
+	}
+	
+	public void setType(EnemyType type){
+		this.type = type;
+		switch (type) {
+		case staticX:
+			physics.setVelocity(speed, 0);
+			break;
+		case staticY:
+			physics.setVelocity(0, speed);
+			break;
+		case homing:
+			physics.setVelocity(0, 0);
+			break;
+		case radiusHoming:
+			physics.setVelocity(0,0);
+			break;
+		}
 	}
 	
 	@Override
@@ -62,7 +79,7 @@ public class Enemy extends Character {
 			break;
 		case radiusHoming:
 			double radius = Math.sqrt((target.getX()-this.getX())*(target.getX()-this.getX()) + (target.getY()-this.getY())*(target.getY()-this.getY()));
-			if (radius < 200) {
+			if (radius < 100) {
 				moveTowards();
 			}
 			break;

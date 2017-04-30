@@ -22,7 +22,7 @@ public class Level2 extends Level implements IEventListener {
 		new Wall(0, 0, 20, gameHeight, this);
 		new Wall(gameWidth-20, 0, 20, gameHeight, this);
 		new Wall(0, 0, gameWidth, 20, this);
-		new Wall(0, gameHeight-40, gameWidth, 20, this);
+		new Wall(0, gameHeight-20, gameWidth, 20, this);
 		
 		// level 2
 		new Wall(0, 600, 400, 25, this);
@@ -39,11 +39,6 @@ public class Level2 extends Level implements IEventListener {
 		door1.addEventListener(this, Events.DOOR);
 		Door door2 = new Door(600, 100, this);
 //		door2.addEventListener(this, Events.DOOR);
-		
-		// buttons
-//		Button button1 = new Button("button1", 60, 250, this);
-//		button1.addEventListener(this, Events.BUTTON_ON);
-//		button1.addEventListener(this, Events.BUTTON_OFF);
 		
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 720, this);
