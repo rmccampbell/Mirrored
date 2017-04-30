@@ -7,6 +7,10 @@ import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
+import edu.virginia.engine.tweening.Tween;
+import edu.virginia.engine.tweening.TweenManager;
+import edu.virginia.engine.tweening.TweenTransitions;
+import edu.virginia.engine.tweening.TweenableParams;
 
 public class Level5 extends Level implements IEventListener {
 
@@ -14,10 +18,21 @@ public class Level5 extends Level implements IEventListener {
 	SplashTower tower1;
 	Enemy enemy1, enemy2, enemy3, enemy4;
 	private boolean winScreenShown;
+	static TweenManager myTweenManager = new TweenManager();
 	
 	public Level5() {
 		super("Level 5", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
+		
+		Sprite level5Intro = new Sprite("level5Intro", "level05.png");
+		this.addChild(level5Intro);
+		level5Intro.setPivotPoint(0,0);
+		level5Intro.setPosition(300,200);
+		level5Intro.setzOrder(1);
+		
+		Tween level5Tween = new Tween(level5Intro, 200, TweenTransitions.EASE_OUT);
+		level5Tween.animate(TweenableParams.ALPHA, 1.0, 0.0);
+		Main.getInstance().getTweenManager().add(level5Tween);
 		
 		new Ground(0, 0, gameWidth, 475, this);
 		new Ground(375, 475, gameWidth-375, 125, this);
@@ -84,6 +99,7 @@ public class Level5 extends Level implements IEventListener {
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		physicsManager.update();
+		Main.getInstance().getTweenManager().update(1);
   	}
 	
 	@Override

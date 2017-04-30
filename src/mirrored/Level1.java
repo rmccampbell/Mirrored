@@ -3,15 +3,30 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
+import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
+import edu.virginia.engine.tweening.Tween;
+import edu.virginia.engine.tweening.TweenManager;
+import edu.virginia.engine.tweening.TweenTransitions;
+import edu.virginia.engine.tweening.TweenableParams;
 
 public class Level1 extends Level implements IEventListener {
 
 	public Level1() {
 		super("Level 1", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
+		
+		Sprite level1Intro = new Sprite("level1Intro", "level01.png");
+		this.addChild(level1Intro);
+		level1Intro.setPivotPoint(0,0);
+		level1Intro.setPosition(300,200);
+		level1Intro.setzOrder(1);
+		
+		Tween level1Tween = new Tween(level1Intro, 200, TweenTransitions.EASE_OUT);
+		level1Tween.animate(TweenableParams.ALPHA, 1.0, 0.0);
+		Main.getInstance().getTweenManager().add(level1Tween);
 		
 		// level 1
 		new Ground(0, -25, gameWidth, 350, this);
@@ -62,6 +77,7 @@ public class Level1 extends Level implements IEventListener {
 		super.update(pressedKeys);
 		physicsManager.update();
 //		particleMan.update();
+		Main.getInstance().getTweenManager().update(1);
 	}
 
 	@Override

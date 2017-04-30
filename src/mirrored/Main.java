@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.sound.SoundManager;
+import edu.virginia.engine.tweening.TweenManager;
 
 public class Main extends Game {
 	
@@ -15,6 +16,7 @@ public class Main extends Game {
 	private List<Class<? extends Level>> levels;
 	private Level level;
 	static SoundManager mySoundManager = new SoundManager();
+	static TweenManager myTweenManager = new TweenManager();
 
 	private static Main instance;
 
@@ -67,6 +69,10 @@ public class Main extends Game {
 //	public PhysicsManager getPhysicsManager() {
 //		return level.getPhysicsManager();
 //	}
+	
+	public TweenManager getTweenManager(){
+		return myTweenManager;
+	}
 	
 	public static Main getInstance() {
 		return instance;

@@ -14,7 +14,7 @@ import edu.virginia.engine.tweening.TweenableParams;
 
 public class Level0 extends Level implements IEventListener {
 
-	static TweenManager myTweenManager = new TweenManager();
+	//static TweenManager myTweenManager = new TweenManager();
 	double time;
 	
 	public Level0() {
@@ -35,7 +35,7 @@ public class Level0 extends Level implements IEventListener {
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		if(!pressedKeys.isEmpty()) Main.getInstance().nextLevel();
-		myTweenManager.update(5);
+		//myTweenManager.update(5);
 	}
 
 	@Override
