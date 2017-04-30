@@ -86,20 +86,28 @@ public class Level4 extends Level implements IEventListener {
         Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.staticY, player1, this);
         enemy1.setPosition(100, gameHeight-580);
 
-        Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticY, player1, this);
+        Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png", EnemyType.staticY, player2, this);
         enemy2.setPosition(900, gameHeight-200);
 
         Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticY, player1, this);
         enemy3.setPosition(400, gameHeight-200);
 
-        Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.staticY, player1, this);
+        Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.staticY, player2, this);
         enemy4.setPosition(600, gameHeight-580);
 
         Enemy enemy5 = new Enemy("enemy5", "ghostSheet.png", EnemyType.staticX, player1, this);
-        enemy5.setPosition(100, gameHeight-580);
+        enemy5.setPosition(130, gameHeight-580);
 
-        Enemy enemy6 = new Enemy("enemy6", "ghostSheet.png", EnemyType.staticX, player1, this);
-        enemy6.setPosition(600, gameHeight-580);
+        Enemy enemy6 = new Enemy("enemy6", "ghostSheet.png", EnemyType.staticX, player2, this);
+        enemy6.setPosition(630, gameHeight-225);
+
+        //buttons
+        Button button1 = new Button("button1", 250, gameHeight-410, this);
+        button1.addEventListener(this, Events.BUTTON_ON);
+        Button button2 = new Button("button2", 750, gameHeight-230, this);
+        button2.addEventListener(this, Events.BUTTON_ON);
+
+
 
 //        Enemy enemy4 = new Enemy("enemy4", "ghostSheet.png", EnemyType.homing, player2, this);
 //        enemy4.setPosition(550, 400);
@@ -116,25 +124,23 @@ public class Level4 extends Level implements IEventListener {
     }
 
     public void handleEvent(Event event) {
-        if (event.getType().equals(Events.SWITCH)) {
-
+        if (event.getType().equals(Events.DEATH)) {
+            Main.getInstance().resetLevel();
+        }
+        if (event.getType().equals(Events.DOOR)) {
+            Main.getInstance().nextLevel();
         }
 
-        if (event.getType().equals(Events.BUTTON_HOLD)) {
+        if (event.getType().equals(Events.BUTTON_ON)) {
             DisplayObject obj = ((DisplayObject) event.getSource());
             if (obj.getId().equals("button1")) {
-
+                new Arrow(930, gameHeight-570, -8, 0, this);
+                new Arrow(430, gameHeight-570, -8, 0, this);
             }
 
             if (obj.getId().equals("button2")) {
-
-            }
-
-            if (event.getType().equals(Events.DEATH)) {
-                Main.getInstance().resetLevel();
-            }
-            if (event.getType().equals(Events.DOOR)) {
-                Main.getInstance().nextLevel();
+                new Arrow(100, gameHeight-410, 8, 0, this);
+                new Arrow(600, gameHeight-410, 8, 0, this);
             }
         }
 

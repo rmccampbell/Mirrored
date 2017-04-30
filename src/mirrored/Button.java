@@ -18,6 +18,7 @@ public class Button extends Sprite {
 		level.addChild(this);
 		setPosition(x, y);
 		level.getPhysicsManager().addTrigger(this);
+		setzOrder(-1);
 	}
 	
 	private void activate() {
