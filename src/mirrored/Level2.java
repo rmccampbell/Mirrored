@@ -3,9 +3,14 @@ package mirrored;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
+import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
+import edu.virginia.engine.tweening.Tween;
+import edu.virginia.engine.tweening.TweenManager;
+import edu.virginia.engine.tweening.TweenTransitions;
+import edu.virginia.engine.tweening.TweenableParams;
 
 public class Level2 extends Level implements IEventListener {
 
@@ -15,6 +20,16 @@ public class Level2 extends Level implements IEventListener {
 		super("Level 2", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
 		
+		Sprite level2Intro = new Sprite("level2Intro", "level02.png");
+		this.addChild(level2Intro);
+		level2Intro.setPivotPoint(0,0);
+		level2Intro.setPosition(300,200);
+		level2Intro.setzOrder(1);
+		
+		Tween level2Tween = new Tween(level2Intro, 200, TweenTransitions.EASE_OUT);
+		level2Tween.animate(TweenableParams.ALPHA, 1.0, 0.0);
+		Main.getInstance().getTweenManager().add(level2Tween);
+		
 		new Ground(0, 0, gameWidth, gameHeight, this);
 		
 		// boundaries 
@@ -22,7 +37,7 @@ public class Level2 extends Level implements IEventListener {
 		new Wall(0, 0, 20, gameHeight, this);
 		new Wall(gameWidth-20, 0, 20, gameHeight, this);
 		new Wall(0, 0, gameWidth, 20, this);
-		new Wall(0, gameHeight-40, gameWidth, 20, this);
+		new Wall(0, gameHeight-20, gameWidth, 20, this);
 		
 		// level 2
 		new Wall(0, 600, 400, 25, this);
@@ -39,11 +54,6 @@ public class Level2 extends Level implements IEventListener {
 		door1.addEventListener(this, Events.DOOR);
 		Door door2 = new Door(600, 100, this);
 //		door2.addEventListener(this, Events.DOOR);
-		
-		// buttons
-//		Button button1 = new Button("button1", 60, 250, this);
-//		button1.addEventListener(this, Events.BUTTON_ON);
-//		button1.addEventListener(this, Events.BUTTON_OFF);
 		
 		// players
 		Player player1 = new Player(false, (0.05) * gameWidth, 720, this);
@@ -77,6 +87,7 @@ public class Level2 extends Level implements IEventListener {
 		super.update(pressedKeys);
 		physicsManager.update();
 //		particleMan.update();
+		Main.getInstance().getTweenManager().update(1);
 	}
 
 	@Override

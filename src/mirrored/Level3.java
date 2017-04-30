@@ -7,6 +7,10 @@ import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
+import edu.virginia.engine.tweening.Tween;
+import edu.virginia.engine.tweening.TweenManager;
+import edu.virginia.engine.tweening.TweenTransitions;
+import edu.virginia.engine.tweening.TweenableParams;
 
 /**
  * Created by Laith on 4/24/17.
@@ -20,6 +24,16 @@ public class Level3 extends Level implements IEventListener {
 		super("Level 3", "lava_tiles.png");
 		physicsManager = new PhysicsManager();
 
+		Sprite level3Intro = new Sprite("level3Intro", "level03.png");
+		this.addChild(level3Intro);
+		level3Intro.setPivotPoint(0,0);
+		level3Intro.setPosition(300,200);
+		level3Intro.setzOrder(1);
+		
+		Tween level3Tween = new Tween(level3Intro, 200, TweenTransitions.EASE_OUT);
+		level3Tween.animate(TweenableParams.ALPHA, 1.0, 0.0);
+		Main.getInstance().getTweenManager().add(level3Tween);
+		
 		// level 3
 		new Ground(0, 0, gameWidth, 250, this);
 		new Ground(0, 250, gameWidth / 2, gameHeight - 250, this);
@@ -91,6 +105,7 @@ public class Level3 extends Level implements IEventListener {
 	public void update(ArrayList<Integer> pressedKeys) {
 		super.update(pressedKeys);
 		physicsManager.update();
+		Main.getInstance().getTweenManager().update(1);
 	}
 
 	@Override
@@ -119,11 +134,7 @@ public class Level3 extends Level implements IEventListener {
 		}
 		if (event.getType().equals(Events.DOOR)) {
 			Main.getInstance().nextLevel();
-//			winScreenShown = true;
-//			Sprite win = new Sprite("win", "win.png");
-//			win.setPosition(500, 400);
-//			win.setzOrder(1);
-//			this.addChild(win);
+
 		}
 	}
 }
