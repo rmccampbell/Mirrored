@@ -26,7 +26,7 @@ public class Main extends Game {
 		instance = this;
 
 //		levels = Arrays.asList(Level0.class, Level1.class, Level2.class, Level3.class, Level4.class);
-//		level = new Level4();
+//		level = new Level5();
 
 		levels = Arrays.asList(Level0.class, Level1.class, Level2.class, Level3.class, Level4.class, Level5.class);
 		level = new Level0();
