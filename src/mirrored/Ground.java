@@ -6,6 +6,6 @@ public class Ground extends TexturedSprite {
 		super("ground", "floor_tiles.png", x, y, width, height);
 		level.addChild(this);
 		level.getPhysicsManager().addTrigger(this);
-		setzOrder(-1);
+		setzOrder(-2);
 	}
 }

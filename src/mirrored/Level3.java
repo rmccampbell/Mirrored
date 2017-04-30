@@ -15,7 +15,6 @@ public class Level3 extends Level implements IEventListener {
 	SplashTower tower1;
 	SplashTower tower2;
 	Door door1, door2;
-	private boolean winScreenShown;
 
 	public Level3() {
 		super("Level 3", "lava_tiles.png");
@@ -118,12 +117,13 @@ public class Level3 extends Level implements IEventListener {
 		if (event.getType().equals(Events.DEATH)) {
 			Main.getInstance().resetLevel();
 		}
-		if (event.getType().equals(Events.DOOR) && !winScreenShown) {
-			winScreenShown = true;
-			Sprite win = new Sprite("win", "win.png");
-			win.setPosition(500, 400);
-			win.setzOrder(1);
-			this.addChild(win);
+		if (event.getType().equals(Events.DOOR)) {
+			Main.getInstance().nextLevel();
+//			winScreenShown = true;
+//			Sprite win = new Sprite("win", "win.png");
+//			win.setPosition(500, 400);
+//			win.setzOrder(1);
+//			this.addChild(win);
 		}
 	}
 }

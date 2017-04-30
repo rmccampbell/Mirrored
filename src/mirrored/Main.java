@@ -23,8 +23,8 @@ public class Main extends Game {
 		super("Prototype", gameWidth + 6, gameHeight + 29);
 		instance = this;
 
-		levels = Arrays.asList(Level0.class, Level1.class, Level2.class, Level3.class);
-		level = new Level0();
+		levels = Arrays.asList(Level0.class, Level1.class, Level2.class, Level3.class, Level4.class);
+		level = new Level4();
 		
 		addChild(level);
 

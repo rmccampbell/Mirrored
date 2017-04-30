@@ -105,7 +105,7 @@ public class Level2 extends Level implements IEventListener {
 //			this.addChild(win);
 		}
 		if(event.getType().equals(Events.BUTTON_ON)){
-			 new Arrow(480, gameHeight-500, -4, 0, this);
+			 new Arrow(480, gameHeight-500, -8, 0, this);
 		}
 		if(event.getType().equals(Events.BUTTON_OFF)){
 			
