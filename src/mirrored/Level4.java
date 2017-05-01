@@ -5,6 +5,9 @@ import edu.virginia.engine.display.Sprite;
 import edu.virginia.engine.events.Event;
 import edu.virginia.engine.events.IEventListener;
 import edu.virginia.engine.physics.PhysicsManager;
+import edu.virginia.engine.tweening.Tween;
+import edu.virginia.engine.tweening.TweenTransitions;
+import edu.virginia.engine.tweening.TweenableParams;
 
 import java.util.ArrayList;
 
@@ -18,6 +21,16 @@ public class Level4 extends Level implements IEventListener {
     public Level4() {
         super("Level 4", "lava_tiles.png");
         physicsManager = new PhysicsManager();
+
+        Sprite level4Intro = new Sprite("level4Intro", "level04.png");
+        this.addChild(level4Intro);
+        level4Intro.setPivotPoint(0,0);
+        level4Intro.setPosition(300,200);
+        level4Intro.setzOrder(1);
+
+        Tween level4Tween = new Tween(level4Intro, 200, TweenTransitions.EASE_OUT);
+        level4Tween.animate(TweenableParams.ALPHA, 1.0, 0.0);
+        Main.getInstance().getTweenManager().add(level4Tween);
 
         door1 = new Door(250, 100, this);
         door1.addEventListener(this, Events.DOOR);
@@ -121,6 +134,7 @@ public class Level4 extends Level implements IEventListener {
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
         physicsManager.update();
+        Main.getInstance().getTweenManager().update(1);
     }
 
     public void handleEvent(Event event) {
