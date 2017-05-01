@@ -33,20 +33,13 @@ public class Main extends Game {
 //		level = new Level5();
 
 		levels = Arrays.asList(Level0.class, Level1.class, Level2.class, Level3.class, Level4.class, Level5.class);
-		level = new Level5();
+		level = new Level0();
 		
 		addChild(level);
 
 		mySoundManager.loadSound("BGmusic", "gameMusic.wav");
 		mySoundManager.playSound("BGmusic", true);
-		
-		// restart game - mouse clicks 
-		this.getMainFrame().addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent me){
-				currentClicks.add(me.getX());
-				currentClicks.add(me.getY());
-			}
-		});
+
 	}
 	
 	public Level getLevel() {
@@ -101,8 +94,22 @@ public class Main extends Game {
 		return instance;
 	}
 	
+	@Override
+	public void click(int x, int y) {
+		currentClicks.add(x);
+		currentClicks.add(y);
+	}
+	
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.start();
+		
+		// restart game - mouse clicks 
+		main.getMainFrame().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent me){
+				currentClicks.add(me.getX());
+				currentClicks.add(me.getY());
+			}
+		});
 	}
 }
