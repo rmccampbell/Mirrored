@@ -1,5 +1,8 @@
 package mirrored;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +20,7 @@ public class Main extends Game {
 	private Level level;
 	static SoundManager mySoundManager = new SoundManager();
 	static TweenManager myTweenManager = new TweenManager();
+	private static ArrayList<Integer> currentClicks = new ArrayList<Integer>();
 
 	private static Main instance;
 
@@ -35,6 +39,14 @@ public class Main extends Game {
 
 		mySoundManager.loadSound("BGmusic", "gameMusic.wav");
 		mySoundManager.playSound("BGmusic", true);
+		
+		// restart game - mouse clicks 
+		this.getMainFrame().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent me){
+				currentClicks.add(me.getX());
+				currentClicks.add(me.getY());
+			}
+		});
 	}
 	
 	public Level getLevel() {
@@ -79,6 +91,10 @@ public class Main extends Game {
 	
 	public SoundManager getSoundManager(){
 		return mySoundManager;
+	}
+	
+	public static ArrayList<Integer> getCurrentClicks(){
+		return currentClicks;
 	}
 	
 	public static Main getInstance() {

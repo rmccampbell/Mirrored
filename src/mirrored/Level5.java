@@ -1,5 +1,9 @@
 package mirrored;
 
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import edu.virginia.engine.display.DisplayObject;
@@ -100,6 +104,7 @@ public class Level5 extends Level implements IEventListener {
 		Main.getInstance().getSoundManager().loadSound("arrowSound", "arrowSound.wav");
 		Main.getInstance().getSoundManager().loadSound("switchSound", "switchSound.wav");
 		Main.getInstance().getSoundManager().loadSound("splashTowerSound", "splashTowerSound.wav");
+
 	}
 
 	@Override
@@ -107,6 +112,18 @@ public class Level5 extends Level implements IEventListener {
 		super.update(pressedKeys);
 		physicsManager.update();
 		Main.getInstance().getTweenManager().update(1);
+		if(winScreenShown && pressedKeys.contains(KeyEvent.VK_R)){
+			Main.getInstance().setLevel(1);
+		}
+		/*
+		if(!Main.getCurrentClicks().isEmpty() && winScreenShown){
+			Rectangle r = new Rectangle(400, 350, 200, 100);
+			if(r.contains(Main.getCurrentClicks().get(0), Main.getCurrentClicks().get(1))){
+				Main.getInstance().setLevel(1);
+			}
+			Main.getCurrentClicks().remove(0);
+			Main.getCurrentClicks().remove(0);
+		} */
   	}
 	
 	@Override
@@ -120,6 +137,10 @@ public class Level5 extends Level implements IEventListener {
 			win.setPosition(500, 400);
 			win.setzOrder(1);
 			this.addChild(win);
+			Sprite replay = new Sprite("replay", "replay.png");
+			replay.setPosition(500, 600);
+			win.setzOrder(1);
+			this.addChild(replay);
 		}
 		if(event.getType().equals(Events.BUTTON_HOLD)){
 			DisplayObject obj = ((DisplayObject) event.getSource());
