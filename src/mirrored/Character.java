@@ -31,20 +31,6 @@ public class Character extends AnimatedSprite {
 		if (!onGround)
 			fall();
 		onGround = false;
-		switch (facing) {
-		case LEFT:
-			setAnimation(walking ? "walkLeft" : "standLeft");
-			break;
-		case RIGHT:
-			setAnimation(walking ? "walkRight" : "standRight");
-			break;
-		case UP:
-			setAnimation(walking ? "walkUp" : "standUp");
-			break;
-		case DOWN:
-			setAnimation(walking ? "walkDown" : "standDown");
-			break;
-		}
 	}
 	
 	private void fall() {

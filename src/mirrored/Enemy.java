@@ -21,26 +21,12 @@ public class Enemy extends Character {
 		addAnimation("standDown", 0, 12);
 		setAnimation("standDown");
 		setFrameDuration(4);
-		this.setBBox(0, 0, this.getWidth()-5, this.getHeight()-15);
+		this.setBBox(0, 10, 100, 100);
 //		this.walking = true;
 		
-		this.type = type;
 		this.target = target;
 		physics = getPhysics();
-		switch (type) {
-		case staticX:
-			physics.setVelocity(speed, 0);
-			break;
-		case staticY:
-			physics.setVelocity(0, speed);
-			break;
-		case homing:
-			physics.setVelocity(0, 0);
-			break;
-		case radiusHoming:
-			physics.setVelocity(0,0);
-			break;
-		}
+		setType(type);
 	}
 	
 	public void setTarget(Player p){
@@ -61,6 +47,8 @@ public class Enemy extends Character {
 			break;
 		case radiusHoming:
 			physics.setVelocity(0,0);
+			break;
+		default:
 			break;
 		}
 	}
@@ -112,4 +100,11 @@ public class Enemy extends Character {
 			target.die();
 		}
 	}
+	
+//	@Override
+//	public void draw(Graphics g) {
+//		super.draw(g);
+//		Rectangle2D r = getWorldBBox();
+//		g.drawRect((int)r.getX(), (int)r.getY(), (int)r.getWidth(), (int)r.getHeight());
+//	}
 }

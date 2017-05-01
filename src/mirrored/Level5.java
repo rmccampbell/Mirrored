@@ -17,7 +17,7 @@ public class Level5 extends Level implements IEventListener {
 	Ground bridge;
 	SplashTower tower1;
 	Enemy enemy1, enemy2, enemy3, enemy4;
-	private boolean winScreenShown;
+	private boolean winScreenShown = false;
 	static TweenManager myTweenManager = new TweenManager();
 	
 	public Level5() {
@@ -107,7 +107,7 @@ public class Level5 extends Level implements IEventListener {
 		if(event.getType().equals(Events.DEATH)){
 			Main.getInstance().resetLevel();
 		}
-		if(event.getType().equals(Events.DOOR)) {
+		if(event.getType().equals(Events.DOOR) && !winScreenShown) {
 			winScreenShown = true;
 			Sprite win = new Sprite("win", "win.png");
 			win.setPosition(500, 400);

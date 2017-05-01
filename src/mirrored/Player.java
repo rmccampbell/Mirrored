@@ -64,6 +64,22 @@ public class Player extends Character {
 //		if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
 //			isSynced = !isSynced;
 //		}
+
+		switch (facing) {
+		case LEFT:
+			setAnimation(walking ? "walkLeft" : "standLeft");
+			break;
+		case RIGHT:
+			setAnimation(walking ? "walkRight" : "standRight");
+			break;
+		case UP:
+			setAnimation(walking ? "walkUp" : "standUp");
+			break;
+		case DOWN:
+			setAnimation(walking ? "walkDown" : "standDown");
+			break;
+		}
+
 		super.update(pressedKeys);
 	}
 	

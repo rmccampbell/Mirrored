@@ -1,6 +1,5 @@
 package mirrored;
 
-import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -8,7 +7,8 @@ import java.util.ArrayList;
  * Created by Laith on 4/23/17.
  */
 public class SplashTower extends Character {
-
+	
+	private boolean active = false;
 
     public SplashTower(String id, double x, double y, Level level) {
         super(id, "splash_tower2.png", 1, 2, level);
@@ -26,7 +26,11 @@ public class SplashTower extends Character {
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
-        setAnimation("inactive");
+        if (active)
+        	setAnimation("active");
+        else
+        	setAnimation("inactive");
+        active = false;
     }
 
 //    @Override
@@ -38,7 +42,7 @@ public class SplashTower extends Character {
     
     public void activate() {
     	attack();
-    	setAnimation("active");
+    	active = true;
 	}
 
     //call this when the tower is triggered and pass the result to the getcollision method in physicsmanager so
