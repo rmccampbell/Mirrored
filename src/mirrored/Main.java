@@ -29,7 +29,7 @@ public class Main extends Game {
 //		level = new Level5();
 
 		levels = Arrays.asList(Level0.class, Level1.class, Level2.class, Level3.class, Level4.class, Level5.class);
-		level = new Level0();
+		level = new Level5();
 		
 		addChild(level);
 
@@ -75,6 +75,10 @@ public class Main extends Game {
 	
 	public TweenManager getTweenManager(){
 		return myTweenManager;
+	}
+	
+	public SoundManager getSoundManager(){
+		return mySoundManager;
 	}
 	
 	public static Main getInstance() {

@@ -80,6 +80,9 @@ public class Level2 extends Level implements IEventListener {
 		button1.addEventListener(this, Events.BUTTON_ON);
 		button1.setzOrder(-1);
 	
+		// sound effects
+		Main.getInstance().getSoundManager().loadSound("arrowSound", "arrowSound.wav");
+		
 	}
 	
 	@Override
@@ -117,6 +120,7 @@ public class Level2 extends Level implements IEventListener {
 		}
 		if(event.getType().equals(Events.BUTTON_ON)){
 			 new Arrow(480, gameHeight-500, -8, 0, this);
+			 Main.getInstance().getSoundManager().playSound("arrowSound");
 		}
 		if(event.getType().equals(Events.BUTTON_OFF)){
 			

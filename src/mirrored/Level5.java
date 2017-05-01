@@ -63,6 +63,8 @@ public class Level5 extends Level implements IEventListener {
 		//buttons
 		Button tower1Button = new Button("tower1Button", 900, 75, this);
 		tower1Button.addEventListener(this, Events.BUTTON_HOLD);
+		tower1Button.addEventListener(this, Events.BUTTON_ON);
+		tower1Button.addEventListener(this, Events.BUTTON_OFF);
 		Button arrow1Button = new Button("arrow1Button", 80, 700, this);
 		arrow1Button.addEventListener(this, Events.BUTTON_ON);
 		
@@ -93,6 +95,11 @@ public class Level5 extends Level implements IEventListener {
 		enemy5.setPosition(700, 100);
 		Enemy enemy6 = new Enemy("enemy6", "ghostSheet.png", EnemyType.staticX, player2, this);
 		enemy6.setPosition(600, 200);
+		
+		// sound effects
+		Main.getInstance().getSoundManager().loadSound("arrowSound", "arrowSound.wav");
+		Main.getInstance().getSoundManager().loadSound("switchSound", "switchSound.wav");
+		Main.getInstance().getSoundManager().loadSound("splashTowerSound", "splashTowerSound.wav");
 	}
 
 	@Override
@@ -121,7 +128,20 @@ public class Level5 extends Level implements IEventListener {
 			} 
 		}
 		if(event.getType().equals(Events.BUTTON_ON)){
-			new Arrow(gameWidth-10, 60, -4, 0, this);
+			DisplayObject obj = ((DisplayObject)event.getSource());
+			if (obj.getId().equals("arrow1Button")) {
+				new Arrow(gameWidth-10, 60, -4, 0, this);
+				Main.getInstance().getSoundManager().playSound("arrowSound");
+			} 
+			else if(obj.getId().equals("tower1Button")) {
+				Main.getInstance().getSoundManager().playSound("splashTowerSound", true);
+			}
+		}
+		if (event.getType().equals(Events.BUTTON_OFF)) {
+			DisplayObject obj = ((DisplayObject)event.getSource());
+			if(obj.getId().equals("tower1Button")) {
+				Main.getInstance().getSoundManager().stopSound("splashTowerSound");
+			}
 		}
 		if(event.getType().equals(Events.SWITCH)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
@@ -132,6 +152,7 @@ public class Level5 extends Level implements IEventListener {
 				enemy3.setType(EnemyType.homing);
 				enemy4.setType(EnemyType.homing);
 			}
+			Main.getInstance().getSoundManager().playSound("switchSound");
 		}
 	}
 

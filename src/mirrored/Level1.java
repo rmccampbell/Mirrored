@@ -70,6 +70,8 @@ public class Level1 extends Level implements IEventListener {
 		Enemy enemy3 = new Enemy("enemy3", "ghostSheet.png", EnemyType.staticX, player1, this);
 		enemy3.setPosition(20,220);
 
+		// sound effects
+		Main.getInstance().getSoundManager().loadSound("switchSound", "switchSound.wav");
 	}
 	
 	@Override
@@ -90,6 +92,7 @@ public class Level1 extends Level implements IEventListener {
 			else if (obj.getId().equals("switch2")) {
 				new Ground(200, 325, 100, 100, this);
 			}
+			Main.getInstance().getSoundManager().playSound("switchSound");
 		}
 		if(event.getType().equals(Events.DEATH)) {
 			Main.getInstance().resetLevel();
