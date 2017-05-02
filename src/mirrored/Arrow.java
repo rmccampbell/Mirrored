@@ -6,6 +6,8 @@ import edu.virginia.engine.physics.Direction;
 
 public class Arrow extends Sprite {
 
+	private boolean isLethal = true;
+
 	public Arrow(double x, double y, double vx, double vy, Level level) {
 		super("arrow", "arrow.png");
 		level.addChild(this);
@@ -20,8 +22,12 @@ public class Arrow extends Sprite {
 	@Override
 	public void collision(DisplayObject other, Direction dir) {
 		super.collision(other, dir);
-		if (other instanceof Character)
-			((Character) other).die();
+		if (other instanceof Character) {
+			if (isLethal)
+				((Character) other).die();
+		} else if (other instanceof Wall) {
+			isLethal = false;
+		}
 	}
 
 }

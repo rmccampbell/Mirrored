@@ -12,9 +12,10 @@ public class Player extends Character {
 
 	private static double SPEED = 3;
 
+	private Player otherPlayer;
 	private boolean isSynced = true;
 	private boolean isRight;
-	private Player otherPlayer;
+	private boolean hasKey;
 
 	public Player(boolean isRight, double x, double y, Level level) {
 		super("player" + (isRight ? "2" : "1"), "characterSheet2.png", 4, 4, level);
@@ -93,6 +94,14 @@ public class Player extends Character {
 	
 	public void setSynced(boolean isSynced) {
 		this.isSynced = isSynced;
+	}
+	
+	public boolean hasKey() {
+		return hasKey;
+	}
+	
+	public void setHasKey(boolean hasKey) {
+		this.hasKey = hasKey;
 	}
 	
 	public void handleCollision(Direction dir) {
