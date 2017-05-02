@@ -127,6 +127,8 @@ public class Level4 extends Level implements IEventListener {
 //        Enemy enemy1 = new Enemy("enemy1", "ghostSheet.png", EnemyType.homing, player1, this);
 //        enemy1.setPosition(250, 400);
 
+        // sound effects
+        Main.getInstance().getSoundManager().loadSound("arrowSound", "arrowSound.wav");
 
     }
 
@@ -150,11 +152,12 @@ public class Level4 extends Level implements IEventListener {
             if (obj.getId().equals("button1")) {
                 new Arrow(930, gameHeight-570, -8, 0, this);
                 new Arrow(430, gameHeight-570, -8, 0, this);
+                Main.getInstance().getSoundManager().playSound("arrowSound");
             }
-
             if (obj.getId().equals("button2")) {
                 new Arrow(100, gameHeight-410, 8, 0, this);
                 new Arrow(600, gameHeight-410, 8, 0, this);
+                Main.getInstance().getSoundManager().playSound("arrowSound");
             }
         }
 

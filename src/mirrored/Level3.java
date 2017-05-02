@@ -63,8 +63,12 @@ public class Level3 extends Level implements IEventListener {
 		// buttons
 		Button button1 = new Button("button1", 550, 700, this);
 		button1.addEventListener(this, Events.BUTTON_HOLD);
+		button1.addEventListener(this, Events.BUTTON_ON);
+		button1.addEventListener(this, Events.BUTTON_OFF);
 		Button button2 = new Button("button2", 950, 700, this);
 		button2.addEventListener(this, Events.BUTTON_HOLD);
+		button2.addEventListener(this, Events.BUTTON_ON);
+		button2.addEventListener(this, Events.BUTTON_OFF);
 
 		// players
 		Player player1 = new Player(false, 250, 700, this);
@@ -99,6 +103,10 @@ public class Level3 extends Level implements IEventListener {
 		 * Enemy enemy2 = new Enemy("enemy2", "ghostSheet.png",
 		 * EnemyType.staticX, this, player1); enemy2.setPosition(480,200);
 		 */
+		
+		// sound effects
+		Main.getInstance().getSoundManager().loadSound("switchSound", "switchSound.wav");
+		Main.getInstance().getSoundManager().loadSound("splashTowerSound", "splashTowerSound.wav");
 	}
 
 	@Override
@@ -112,6 +120,7 @@ public class Level3 extends Level implements IEventListener {
 	public void handleEvent(Event event) {
 		if (event.getType().equals(Events.SWITCH)) {
 			new Ground(650, 250, 200, 100, this);
+			Main.getInstance().getSoundManager().playSound("switchSound");
 		}
 
 		if (event.getType().equals(Events.BUTTON_HOLD)) {
@@ -128,7 +137,12 @@ public class Level3 extends Level implements IEventListener {
 				// new Arrow(400, gameHeight-300, 0, -4, this);
 			}
 		}
-
+		if (event.getType().equals(Events.BUTTON_ON)) {
+			Main.getInstance().getSoundManager().playSound("splashTowerSound", true);
+		}
+		if (event.getType().equals(Events.BUTTON_OFF)) {
+			Main.getInstance().getSoundManager().stopSound("splashTowerSound");
+		}
 		if (event.getType().equals(Events.DEATH)) {
 			Main.getInstance().resetLevel();
 		}
