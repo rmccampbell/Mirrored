@@ -151,7 +151,7 @@ public class Level5 extends Level implements IEventListener {
 		if(event.getType().equals(Events.BUTTON_ON)){
 			DisplayObject obj = ((DisplayObject)event.getSource());
 			if (obj.getId().equals("arrow1Button")) {
-				new Arrow(gameWidth-10, 60, -4, 0, this);
+				new Arrow(gameWidth-25, 60, -4, 0, this);
 				Main.getInstance().getSoundManager().playSound("arrowSound");
 			} 
 			else if(obj.getId().equals("tower1Button")) {
