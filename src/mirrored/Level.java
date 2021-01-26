@@ -23,5 +23,7 @@ public class Level extends DisplayObjectContainer {
 	public PhysicsManager getPhysicsManager() {
 		return physicsManager;
 	}
+	
+	public void click(int x, int y) {}
 
 }

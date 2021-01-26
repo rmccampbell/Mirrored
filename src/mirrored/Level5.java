@@ -112,18 +112,18 @@ public class Level5 extends Level implements IEventListener {
 		super.update(pressedKeys);
 		physicsManager.update();
 		Main.getInstance().getTweenManager().update(1);
-		
+	}
+	
+	@Override
+	public void click(int x, int y) {
 		// replay button 
-		if(!Main.getCurrentClicks().isEmpty()){
-			if(winScreenShown){
-				Rectangle r = new Rectangle(400, 550, 200, 100);
-				if(r.contains(Main.getCurrentClicks().get(0), Main.getCurrentClicks().get(1))){
-					Main.getInstance().setLevel(1);
-				}
+		if (winScreenShown){
+			Rectangle r = new Rectangle(400, 550, 200, 100);
+			if (r.contains(x, y)){
+				Main.getInstance().setLevel(1);
 			}
-			Main.getCurrentClicks().remove(0);
-			Main.getCurrentClicks().remove(0);
 		}
+
 	}
 	
 	@Override
